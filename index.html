@@ -1,0 +1,1060 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>DIAMA</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            -webkit-tap-highlight-color: transparent; /* Elimina el flash azul feo al tocar botones en Android/iOS */
+        }
+
+        html{
+            scroll-behavior:smooth;
+        }
+
+        body{
+            font-family:'Inter', sans-serif;
+            color:white;
+            overflow-x:hidden;
+            background:#000;
+        }
+
+        a{
+            text-decoration:none;
+            color:inherit;
+        }
+
+        /* BACKGROUND */
+
+        .background-image{
+            position:fixed;
+            inset:0;
+            z-index:-3;
+        }
+
+        .background-image img{
+            width:100vw;
+            height:100vh;
+            object-fit:cover;
+            image-rendering:auto;
+        }
+
+        .background-overlay{
+            position:fixed;
+            inset:0;
+            background:rgba(0,0,0,0.18);
+            z-index:-2;
+        }
+
+        /* HERO */
+
+        .hero{
+            min-height:100vh;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            text-align:center;
+            padding:120px 20px 80px;
+        }
+
+        .hero-content{
+            max-width:950px;
+        }
+
+        .hero p{
+            font-size:1.05rem;
+            line-height:1.9;
+            opacity:.92;
+            max-width:760px;
+            margin:auto;
+            margin-top:380px;
+            text-shadow:0px 0px 20px rgba(0,0,0,0.4);
+        }
+
+        .hero-buttons{
+            margin-top:45px;
+            display:flex;
+            justify-content:center;
+            gap:18px;
+            flex-wrap:wrap;
+        }
+
+        .hero-buttons button{
+            padding:15px 30px;
+            border:none;
+            border-radius:999px;
+            background:rgba(255,255,255,0.08);
+            backdrop-filter:blur(16px);
+            color:white;
+            cursor:pointer;
+            transition:.35s;
+            border:1px solid rgba(255,255,255,0.12);
+            font-size:.95rem;
+            letter-spacing:1px;
+        }
+
+        .hero-buttons button:hover{
+            transform:translateY(-4px);
+            background:rgba(255,255,255,0.13);
+            box-shadow:0px 0px 35px rgba(255,255,255,0.12);
+        }
+
+        /* SECTIONS */
+
+        .section{
+            width:100%;
+            padding:110px 40px;
+            position:relative;
+            z-index:2;
+        }
+
+        .section-title{
+            font-size:2rem;
+            margin-bottom:45px;
+            letter-spacing:4px;
+            font-weight:600;
+            text-shadow:0px 0px 15px rgba(0,0,0,0.35);
+        }
+
+        /* GALLERY (CARRUSEL CINEMÁTICO HORIZONTAL ULTRA LENTO) */
+
+        .gallery-wrapper {
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+            padding: 10px 0;
+        }
+
+        /* Desvanecido sutil en los extremos laterales */
+        .gallery-wrapper::before,
+        .gallery-wrapper::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 150px;
+            z-index: 3;
+            pointer-events: none;
+        }
+        .gallery-wrapper::before {
+            left: 0;
+            background: linear-gradient(to right, #000 0%, rgba(0,0,0,0) 100%);
+        }
+        .gallery-wrapper::after {
+            right: 0;
+            background: linear-gradient(to left, #000 0%, rgba(0,0,0,0) 100%);
+        }
+
+        .gallery-track {
+            display: flex;
+            width: max-content;
+            gap: 32px;
+            animation: scrollInfiniteHorizontal 70s linear infinite;
+            will-change: transform; /* Optimización de hardware para fluidez en iOS/Android de 120Hz */
+        }
+
+        .gallery-track:hover {
+            animation-play-state: paused;
+        }
+
+        .gallery-item{
+            width: 580px;
+            height: 340px;
+            overflow:hidden;
+            border-radius:24px;
+            position:relative;
+            background:rgba(255,255,255,0.05);
+            backdrop-filter:blur(10px);
+            border:1px solid rgba(255,255,255,0.08);
+            flex-shrink: 0;
+        }
+
+        .gallery-item img{
+            width:100%;
+            height:100%;
+            object-fit:cover;
+            transition: 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        .gallery-item:hover img{
+            transform:scale(1.04);
+        }
+
+        @keyframes scrollInfiniteHorizontal {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%); 
+            }
+        }
+
+        /* EVENTS */
+
+        .events-grid{
+            display:grid;
+            grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+            gap:25px;
+        }
+
+        .event-card{
+            padding:35px;
+            border-radius:28px;
+            background:rgba(255,255,255,0.05);
+            backdrop-filter:blur(18px);
+            border:1px solid rgba(255,255,255,0.08);
+            transition:.35s;
+            min-height:260px;
+        }
+
+        .event-card:hover{
+            transform:translateY(-6px);
+            box-shadow:0px 0px 45px rgba(255,255,255,0.08);
+        }
+
+        .event-card h3{
+            font-size:1.5rem;
+            margin-bottom:20px;
+            letter-spacing:2px;
+        }
+
+        .event-card p{
+            opacity:.82;
+            line-height:1.8;
+        }
+
+        .event-clickable{
+            cursor:pointer;
+        }
+
+        .loading{
+            opacity:.5;
+        }
+
+        /* PHASES */
+
+        .ticket-phases{
+            margin-top:30px;
+            display:flex;
+            flex-direction:column;
+            gap:15px;
+        }
+
+        .phase{
+            padding:18px;
+            border-radius:18px;
+            background:rgba(255,255,255,0.06);
+            border:1px solid rgba(255,255,255,0.08);
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            transition:.3s;
+        }
+
+        .phase.unlocked{
+            cursor:pointer;
+        }
+
+        .phase.unlocked:hover{
+            transform:translateY(-3px);
+            background:rgba(255,255,255,0.1);
+        }
+
+        .phase.locked{
+            opacity:.45;
+            cursor:not-allowed;
+        }
+
+        .phase span{
+            font-weight:600;
+            letter-spacing:1px;
+        }
+
+        .phase small{
+            opacity:.7;
+        }
+
+        /* OVERLAYS */
+
+        .overlay{
+            position:fixed;
+            inset:0;
+            background:rgba(4,4,4,0.96);
+            backdrop-filter:blur(18px);
+            z-index:9999;
+            display:none;
+            overflow-y:auto;
+            -webkit-overflow-scrolling: touch; /* Scroll nativo ultra suave en iPhones/iOS Safari */
+        }
+
+        .overlay.active{
+            display:block;
+        }
+
+        .overlay-close{
+            position:absolute;
+            top:35px;
+            right:40px;
+            border:none;
+            background:none;
+            color:white;
+            font-size:2rem;
+            cursor:pointer;
+            z-index:99999;
+            padding:10px; /* Área de toque extendida para dedos en móvil */
+        }
+
+        /* EVENT OVERLAY */
+
+        .overlay-container{
+            display:grid;
+            grid-template-columns:1.4fr .7fr;
+            min-height:100vh;
+        }
+
+        .overlay-left{
+            padding:120px 60px;
+        }
+
+        .overlay-right{
+            padding:120px 35px;
+            border-left:1px solid rgba(255,255,255,0.08);
+            background:rgba(255,255,255,0.03);
+        }
+
+        .overlay-title{
+            font-size:3rem;
+            margin-bottom:25px;
+            letter-spacing:5px;
+        }
+
+        .overlay-text{
+            max-width:800px;
+            line-height:1.9;
+            opacity:.82;
+            margin-bottom:55px;
+        }
+
+        .overlay-gallery{
+            display:grid;
+            grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+            gap:22px;
+        }
+
+        .overlay-gallery img{
+            width:100%;
+            height:320px;
+            object-fit:cover;
+            border-radius:24px;
+        }
+
+        /* ARTISTS */
+
+        .artists-title{
+            font-size:1.2rem;
+            margin-bottom:25px;
+            letter-spacing:2px;
+        }
+
+        .artist-card{
+            display:flex;
+            align-items:center;
+            gap:16px;
+            padding:16px;
+            border-radius:20px;
+            background:rgba(255,255,255,0.05);
+            border:1px solid rgba(255,255,255,0.08);
+            margin-bottom:15px;
+            transition:.3s;
+            cursor:pointer;
+        }
+
+        .artist-card:hover{
+            transform:translateX(5px);
+            background:rgba(255,255,255,0.08);
+        }
+
+        .artist-image{
+            width:62px;
+            height:62px;
+            border-radius:50%;
+            background:rgba(255,255,255,0.1);
+        }
+
+        .artist-info h4{
+            margin-bottom:5px;
+            letter-spacing:1px;
+        }
+
+        .artist-info p{
+            font-size:.9rem;
+            opacity:.7;
+        }
+
+        /* TICKET OVERLAY */
+
+        .ticket-wrapper{
+            width:100%;
+            min-height:100vh;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            padding:60px 20px;
+        }
+
+        .ticket-content{
+            width:100%;
+            max-width:700px;
+            background:rgba(255,255,255,0.05);
+            border:1px solid rgba(255,255,255,0.08);
+            border-radius:30px;
+            padding:45px;
+            backdrop-filter:blur(20px);
+        }
+
+        .ticket-content h2{
+            margin-bottom:25px;
+            font-size:2rem;
+            letter-spacing:2px;
+        }
+
+        .ticket-content p{
+            opacity:.82;
+            line-height:1.8;
+            margin-bottom:15px;
+        }
+
+        .payment-box{
+            margin-top:30px;
+            margin-bottom:35px;
+            padding:25px;
+            border-radius:20px;
+            background:rgba(255,255,255,0.04);
+            border:1px solid rgba(255,255,255,0.08);
+        }
+
+        .ticket-form{
+            display:flex;
+            flex-direction:column;
+            gap:18px;
+        }
+
+        .ticket-form input,
+        .ticket-form select{
+            width:100%;
+            padding:16px;
+            border-radius:14px;
+            border:1px solid rgba(255,255,255,0.08);
+            background:rgba(255,255,255,0.05);
+            color:white;
+            outline:none;
+            font-size:1rem;
+        }
+
+        .ticket-form option{
+            background:#111;
+        }
+
+        /* Optimización estética específica para el input file */
+        .ticket-form input[type="file"] {
+            padding: 14px;
+            font-size: 0.9rem;
+            cursor: pointer;
+        }
+
+        .transfer-text{
+            font-size:.9rem;
+            opacity:.7;
+            margin-top:10px;
+            line-height: 1.5;
+        }
+
+        .checkbox-row{
+            display:flex;
+            align-items:flex-start;
+            gap:12px;
+            margin-top:10px;
+        }
+
+        .checkbox-row label{
+            line-height:1.6;
+            font-size:.95rem;
+            opacity:.8;
+        }
+
+        .submit-ticket{
+            margin-top:10px;
+            padding:16px;
+            border:none;
+            border-radius:999px;
+            background:white;
+            color:black;
+            cursor:pointer;
+            font-weight:600;
+            transition:.3s;
+        }
+
+        .submit-ticket:hover{
+            transform:translateY(-2px);
+        }
+
+        /* FOOTER */
+
+        footer{
+            padding:70px 20px;
+            text-align:center;
+            font-size:.9rem;
+            opacity:.6;
+            letter-spacing:2px;
+        }
+
+        /* RESPONSIVE MEDIA QUERIES (OPTIMIZACIÓN FULL PARA SMARTPHONES) */
+
+        @media(max-width:950px){
+
+            .hero p{
+                margin-top:260px;
+                font-size: 1rem;
+                padding: 0 10px;
+            }
+
+            .hero-buttons{
+                gap: 12px;
+            }
+
+            .hero-buttons button {
+                width: 100%; /* Botones en bloque completo para mejor área táctil en celular */
+                max-width: 290px;
+                padding: 14px 20px;
+            }
+
+            .section{
+                padding:70px 20px;
+            }
+
+            .section-title {
+                font-size: 1.6rem;
+                margin-bottom: 30px;
+                text-align: center;
+            }
+
+            /* Fix Carrusel: Ancho dinámico para evitar saltos y bordes negros cortados */
+            .gallery-wrapper::before,
+            .gallery-wrapper::after {
+                width: 50px;
+            }
+
+            .gallery-track {
+                gap: 16px;
+            }
+
+            .gallery-item {
+                width: 85vw; /* Ocupa el 85% del ancho del celular manteniendo proporción de cuadro */
+                height: 240px;
+                border-radius: 20px;
+            }
+
+            /* Fix Overlays Móvil */
+            .overlay-close {
+                top: 20px;
+                right: 20px;
+                font-size: 2.5rem;
+            }
+
+            .overlay-container{
+                grid-template-columns:1fr;
+            }
+
+            .overlay-left {
+                padding: 90px 20px 40px 20px;
+            }
+
+            .overlay-title {
+                font-size: 1.8rem;
+                letter-spacing: 2px;
+                line-height: 1.3;
+            }
+
+            .overlay-text {
+                margin-bottom: 35px;
+                font-size: 0.95rem;
+            }
+
+            .overlay-right{
+                border-left:none;
+                border-top:1px solid rgba(255,255,255,0.08);
+                padding: 40px 20px 80px 20px;
+            }
+
+            /* Ticket form responsive fix */
+            .ticket-wrapper {
+                padding: 70px 15px 40px 15px;
+            }
+
+            .ticket-content {
+                padding: 25px 18px;
+                border-radius: 24px;
+            }
+
+            .ticket-content h2 {
+                font-size: 1.5rem;
+                letter-spacing: 1px;
+            }
+
+            .payment-box {
+                padding: 18px;
+                margin-top: 20px;
+                margin-bottom: 25px;
+            }
+
+            .payment-box p {
+                font-size: 0.95rem;
+                word-break: break-all; /* Evita que la CLABE interbancaria se salga del contenedor */
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <div class="background-image">
+        <img src="Imagenes/DiamaQueretaro001/DIAMAXP.png" alt="">
+    </div>
+
+    <div class="background-overlay"></div>
+
+    <section class="hero">
+
+        <div class="hero-content">
+
+            <p>
+                Una nueva generación para la música electrónica en México.
+            </p>
+
+            <div class="hero-buttons">
+
+                <button onclick="openOverlay()">
+                    DIAMA QUERÉTARO
+                </button>
+
+                <button onclick="scrollToPachuca()">
+                    DIAMA PACHUCA
+                </button>
+
+                <button>
+                    CDMX (LOADING)
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <section class="section">
+
+        <div class="gallery-wrapper">
+
+            <div class="gallery-track">
+
+                <div class="gallery-item">
+                    <img src="Imagenes/DiamaQueretaro001/FOTO1.jpg">
+                </div>
+
+                <div class="gallery-item">
+                    <img src="Imagenes/DiamaQueretaro001/FOTO2.jpg">
+                </div>
+
+                <div class="gallery-item">
+                    <img src="Imagenes/DiamaQueretaro001/FOTO3.jpg">
+                </div>
+
+                <div class="gallery-item">
+                    <img src="Imagenes/DiamaQueretaro001/FOTO4.jpg">
+                </div>
+
+
+                <div class="gallery-item">
+                    <img src="Imagenes/DiamaQueretaro001/FOTO1.jpg">
+                </div>
+
+                <div class="gallery-item">
+                    <img src="Imagenes/DiamaQueretaro001/FOTO2.jpg">
+                </div>
+
+                <div class="gallery-item">
+                    <img src="Imagenes/DiamaQueretaro001/FOTO3.jpg">
+                </div>
+
+                <div class="gallery-item">
+                    <img src="Imagenes/DiamaQueretaro001/FOTO4.jpg">
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <section class="section" id="pachuca-section">
+
+        <h3 class="section-title">
+            EVENTOS
+        </h3>
+
+        <div class="events-grid">
+
+            <div class="event-card event-clickable" onclick="openOverlay()">
+
+                <h3>
+                    DIAMA QUERÉTARO — EDICIÓN 001
+                </h3>
+
+                <p>
+                    Queretaro Experiencia 001
+                </p>
+
+            </div>
+
+            <div class="event-card">
+
+                <h3>
+                    DIAMA PACHUCA
+                </h3>
+
+                <p>
+                    Próxima experiencia DIAMA.
+                </p>
+
+                <div class="ticket-phases">
+
+                    <div class="phase unlocked" onclick="openTicketOverlay()">
+
+                        <span>FASE 1</span>
+
+                        <strong>$80 MXN</strong>
+
+                        <small>Disponible</small>
+
+                    </div>
+
+                    <div class="phase locked">
+
+                        <span>FASE 2</span>
+
+                        <strong>$100 MXN</strong>
+
+                        <small>Bloqueada</small>
+
+                    </div>
+
+                    <div class="phase locked">
+
+                        <span>FASE 3</span>
+
+                        <strong>$120 MXN</strong>
+
+                        <small>Bloqueada</small>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="event-card loading">
+
+                <h3>
+                    DIAMA CDMX
+                </h3>
+
+                <p>
+                    Loading...
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <div class="overlay" id="overlay">
+
+        <button class="overlay-close" onclick="closeOverlay()">
+            ×
+        </button>
+
+        <div class="overlay-container">
+
+            <div class="overlay-left">
+
+                <h2 class="overlay-title">
+                    DIAMA QUERÉTARO — EDICIÓN 001
+                </h2>
+
+                <p class="overlay-text">
+
+                    La primera edición de DIAMA en Querétaro reunió artistas,
+                    cultura rave, música electrónica emocional y estética
+                    futurista inspirada en comunidades modernas del EDM.
+
+                    Este fue el inicio de un nuevo movimiento enfocado en
+                    internet culture, hyperpop, EDM y experiencias rave
+                    experimentales dentro de México.
+
+                </p>
+
+                <div class="overlay-gallery">
+
+                    <img src="Imagenes/DiamaQueretaro001/FOTO1.jpg">
+
+                    <img src="Imagenes/DiamaQueretaro001/FOTO2.jpg">
+
+                </div>
+
+            </div>
+
+            <div class="overlay-right">
+
+                <h3 class="artists-title">
+                    ARTISTAS
+                </h3>
+
+                <div class="artist-card">
+
+                    <div class="artist-image"></div>
+
+                    <div class="artist-info">
+                        <h4>CAPARROSO</h4>
+                        <p>Ambient / EDM / Internet Core</p>
+                    </div>
+
+                </div>
+
+                <div class="artist-card">
+
+                    <div class="artist-image"></div>
+
+                    <div class="artist-info">
+                        <h4>ANDRESESTR3S</h4>
+                        <p>Tech House / Psytrance / EDM</p>
+                    </div>
+
+                </div>
+
+                <div class="artist-card">
+
+                    <div class="artist-image"></div>
+
+                    <div class="artist-info">
+                        <h4>FIREFLYLIGHT</h4>
+                        <p>Hyperpop / Dembow / EDM</p>
+                    </div>
+
+                </div>
+
+                <div class="artist-card">
+
+                    <div class="artist-image"></div>
+
+                    <div class="artist-info">
+                        <h4>BREAKMADRE</h4>
+                        <p>Cumbia Extravaganza / UK Drill / Hyperpop</p>
+                    </div>
+
+                </div>
+
+                <div class="artist-card">
+
+                    <div class="artist-image"></div>
+
+                    <div class="artist-info">
+                        <h4>KINYCHBEAT</h4>
+                        <p>Dubstep / EDM / Hard Techno</p>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="overlay" id="ticketOverlay">
+
+        <button class="overlay-close" onclick="closeTicketOverlay()">
+            ×
+        </button>
+
+        <div class="ticket-wrapper">
+
+            <div class="ticket-content">
+
+                <h2>
+                    DIAMA — PREVENTA PACHUCA
+                </h2>
+
+                <p>
+                    Evento de música electrónica.
+                    <br>
+                    Exclusivo para mayores de 18 años.
+                </p>
+
+                <p>
+                    Se requerirá identificación oficial para ingresar.
+                </p>
+
+                <p>
+                    La ubicación exacta del evento será enviada directamente
+                    al número celular registrado.
+                </p>
+
+                <div class="payment-box">
+
+                    <p>
+                        <strong>Banco:</strong>
+                        Banamex
+                    </p>
+
+                    <p>
+                        <strong>Titular:</strong>
+                        Andrés Ortiz Ayala
+                    </p>
+
+                    <p>
+                        <strong>Cuenta:</strong>
+                        <br>
+                        002180702274850419
+                    </p>
+
+                    <p>
+                        <strong>Acceso preventa:</strong>
+                        $80 MXN
+                    </p>
+
+                </div>
+
+                <form class="ticket-form" action="https://formspree.io/f/xojzqblp" method="POST" enctype="multipart/form-data">
+
+                    <input 
+                    type="text" 
+                    name="nombre"
+                    placeholder="Nombre completo"
+                    required>
+
+                    <input 
+                    type="tel"
+                    name="celular"
+                    placeholder="Número celular"
+                    required>
+
+                    <select name="metodo_acceso" required>
+
+                        <option value="">
+                            Método de acceso
+                        </option>
+
+                        <option value="transferencia">
+                            Transferencia bancaria
+                        </option>
+
+                        <option value="taquilla">
+                            Pago en taquilla
+                        </option>
+
+                    </select>
+
+                    <div>
+
+                        <input 
+                        type="file"
+                        name="comprobante_transferencia"
+                        accept="image/*">
+
+                        <p class="transfer-text">
+                            En caso de realizar transferencia,
+                            selecciona la captura o foto del comprobante arriba.
+                        </p>
+
+                    </div>
+
+                    <div class="checkbox-row">
+
+                        <input 
+                        type="checkbox"
+                        id="adultCheck"
+                        required>
+
+                        <label for="adultCheck">
+                            Confirmo que soy mayor de 18 años
+                            y entiendo que se requerirá identificación oficial.
+                        </label>
+
+                    </div>
+
+                    <button type="submit" class="submit-ticket">
+                        Registrar acceso
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <footer>
+        DIAMA — INTERNET CULTURE / RAVE / COMMUNITY
+    </footer>
+
+    <script>
+
+        const overlay = document.getElementById("overlay");
+        const ticketOverlay = document.getElementById("ticketOverlay");
+
+        function openOverlay(){
+            overlay.classList.add("active");
+        }
+
+        function closeOverlay(){
+            overlay.classList.remove("active");
+        }
+
+        function openTicketOverlay(){
+            ticketOverlay.classList.add("active");
+        }
+
+        function closeTicketOverlay(){
+            ticketOverlay.classList.remove("active");
+        }
+
+        function scrollToPachuca(){
+
+            document.getElementById("pachuca-section").scrollIntoView({
+                behavior:"smooth"
+            });
+
+        }
+
+    </script>
+
+</body>
+</html>
