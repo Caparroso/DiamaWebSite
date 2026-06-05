@@ -287,6 +287,66 @@
             opacity:.7;
         }
 
+        /* APARTADO LINKS / SOCIAL (MINIMAL SOFT STYLE) */
+
+        .links-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .links-column h4 {
+            font-size: 0.85rem;
+            letter-spacing: 3px;
+            opacity: 0.4;
+            margin-bottom: 25px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .links-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .link-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 24px;
+            border-radius: 16px;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.06);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        .link-item:hover {
+            background: rgba(255,255,255,0.08);
+            border-color: rgba(255,255,255,0.15);
+            transform: translateX(4px);
+        }
+
+        .link-label {
+            font-size: 0.95rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+        }
+
+        .link-arrow {
+            font-size: 0.85rem;
+            opacity: 0.3;
+            transition: 0.3s;
+        }
+
+        .link-item:hover .link-arrow {
+            opacity: 1;
+            transform: translateX(3px);
+        }
+
         /* OVERLAYS */
 
         .overlay{
@@ -510,7 +570,7 @@
             padding:70px 20px;
             text-align:center;
             font-size:.9rem;
-            opacity:.6;
+            opacity:.3;
             letter-spacing:2px;
         }
 
@@ -544,7 +604,7 @@
                 text-align: center;
             }
 
-            /* Fix Carrusel: Ancho dinámico para evitar saltos y bordes negros cortados */
+            /* Fix Carrusel */
             .gallery-wrapper::before,
             .gallery-wrapper::after {
                 width: 50px;
@@ -555,9 +615,24 @@
             }
 
             .gallery-item {
-                width: 85vw; /* Ocupa el 85% del ancho del celular manteniendo proporción de cuadro */
+                width: 85vw;
                 height: 240px;
                 border-radius: 20px;
+            }
+
+            /* Links Mobile Fix */
+            .links-container {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .links-column h4 {
+                margin-bottom: 15px;
+                text-align: center;
+            }
+
+            .link-item {
+                padding: 16px 20px;
             }
 
             /* Fix Overlays Móvil */
@@ -615,7 +690,7 @@
 
             .payment-box p {
                 font-size: 0.95rem;
-                word-break: break-all; /* Evita que la CLABE interbancaria se salga del contenedor */
+                word-break: break-all;
             }
 
         }
@@ -789,6 +864,65 @@
 
     </section>
 
+    <section class="section">
+
+        <h3 class="section-title">NETWORKS</h3>
+
+        <div class="links-container">
+
+            <div class="links-column">
+                <h4>Comunidades</h4>
+                <div class="links-list">
+
+                    <a href="https://chat.whatsapp.com/HOFefUDzZOXJ9gKKYtsP5O" target="_blank" class="link-item">
+                        <span class="link-label">WhatsApp Diama Pachuca</span>
+                        <span class="link-arrow">→</span>
+                    </a>
+
+                    <a href="https://chat.whatsapp.com/IBigBkWJuHhEhQOitnE1Pi" target="_blank" class="link-item">
+                        <span class="link-label">WhatsApp Diama Querétaro</span>
+                        <span class="link-arrow">→</span>
+                    </a>
+
+                    <a href="https://chat.whatsapp.com/IBigBkWJuHhEhQOitnE1Pi" target="_blank" class="link-item">
+                        <span class="link-label">WhatsApp Diama Comunidad</span>
+                        <span class="link-arrow">→</span>
+                    </a>
+
+                    <a href="https://discord.gg/2SBrKVW6c" target="_blank" class="link-item">
+                        <span class="link-label">Discord Server</span>
+                        <span class="link-arrow">→</span>
+                    </a>
+
+                </div>
+            </div>
+
+            <div class="links-column">
+                <h4>Plataformas</h4>
+                <div class="links-list">
+
+                    <a href="https://www.instagram.com/diamaaaaaaaaaa/" target="_blank" class="link-item">
+                        <span class="link-label">Instagram</span>
+                        <span class="link-arrow">→</span>
+                    </a>
+
+                    <a href="https://www.tiktok.com/@diamadiamadiama" target="_blank" class="link-item">
+                        <span class="link-label">TikTok</span>
+                        <span class="link-arrow">→</span>
+                    </a>
+
+                    <a href="https://www.youtube.com/@Diamaaaa" target="_blank" class="link-item">
+                        <span class="link-label">YouTube Channel</span>
+                        <span class="link-arrow">→</span>
+                    </a>
+
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+
     <div class="overlay" id="overlay">
 
         <button class="overlay-close" onclick="closeOverlay()">
@@ -935,108 +1069,3 @@
 
                     <p>
                         <strong>Cuenta:</strong>
-                        <br>
-                        002180702274850419
-                    </p>
-
-                    <p>
-                        <strong>Acceso preventa:</strong>
-                        $80 MXN
-                    </p>
-
-                </div>
-
-                <form class="ticket-form" action="https://formspree.io/f/xojzqblp" method="POST">
-
-                    <input 
-                    type="text" 
-                    name="nombre"
-                    placeholder="Nombre completo"
-                    required>
-
-                    <input 
-                    type="tel"
-                    name="celular"
-                    placeholder="Número celular"
-                    required>
-
-                    <select name="metodo_acceso" required>
-
-                        <option value="">
-                            Método de acceso
-                        </option>
-
-                        <option value="transferencia">
-                            Transferencia bancaria
-                        </option>
-
-                    </select>
-
-                    <div>
-                        <p class="transfer-text" style="color: #ff9999; opacity: 1; font-weight: 500;">
-                            * Una vez completado el registro, es obligatorio enviar la captura de tu transferencia al WhatsApp oficial del evento para recibir tu acceso digital.
-                        </p>
-                    </div>
-
-                    <div class="checkbox-row" style="display: grid; grid-template-columns: auto 1fr; align-items: center; gap: 10px;">
-
-                        <input 
-                        type="checkbox"
-                        id="adultCheck"
-                        required>
-
-                        <label for="adultCheck">
-                            Confirmo que soy mayor de 18 años y entiendo que se requerirá identificación oficial.
-                        </label>
-
-                    </div>
-
-                    <button type="submit" class="submit-ticket">
-                        Registrar acceso
-                    </button>
-
-                </form>
-
-            </div>
-
-        </div>
-
-    </div>
-
-    <footer>
-        DIAMA — INTERNET CULTURE / RAVE / COMMUNITY
-    </footer>
-
-    <script>
-
-        const overlay = document.getElementById("overlay");
-        const ticketOverlay = document.getElementById("ticketOverlay");
-
-        function openOverlay(){
-            overlay.classList.add("active");
-        }
-
-        function closeOverlay(){
-            overlay.classList.remove("active");
-        }
-
-        function openTicketOverlay(){
-            ticketOverlay.classList.add("active");
-        }
-
-        function closeTicketOverlay(){
-            ticketOverlay.classList.remove("active");
-        }
-
-        function scrollToPachuca(){
-
-            document.getElementById("pachuca-section").scrollIntoView({
-                behavior:"smooth"
-            });
-
-        }
-
-    </script>
-
-</body>
-</html>
