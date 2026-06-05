@@ -118,7 +118,7 @@
             width:100%;
             padding:110px 40px;
             position:relative;
-            z-index:2;
+            z-index:1; /* Se bajó de 2 a 1 para que no tape a los overlays */
         }
 
         .section-title{
@@ -347,14 +347,14 @@
             transform: translateX(3px);
         }
 
-        /* OVERLAYS */
+        /* OVERLAYS (FIX PRINCIPAL: SE SUBIÓ EL Z-INDEX A 999999) */
 
         .overlay{
             position:fixed;
             inset:0;
             background:rgba(4,4,4,0.96);
             backdrop-filter:blur(18px);
-            z-index:9999;
+            z-index:999999; /* Forzado por encima de cualquier otro div o sección */
             display:none;
             overflow-y:auto;
             -webkit-overflow-scrolling: touch; /* Scroll nativo ultra suave en iPhones/iOS Safari */
@@ -373,7 +373,7 @@
             color:white;
             font-size:2rem;
             cursor:pointer;
-            z-index:99999;
+            z-index:1000000;
             padding:10px; /* Área de toque extendida para dedos en móvil */
         }
 
@@ -1069,3 +1069,108 @@
 
                     <p>
                         <strong>Cuenta:</strong>
+                        <br>
+                        002180702274850419
+                    </p>
+
+                    <p>
+                        <strong>Acceso preventa:</strong>
+                        $80 MXN
+                    </p>
+
+                </div>
+
+                <form class="ticket-form" action="https://formspree.io/f/xojzqblp" method="POST">
+
+                    <input 
+                    type="text" 
+                    name="nombre"
+                    placeholder="Nombre completo"
+                    required>
+
+                    <input 
+                    type="tel"
+                    name="celular"
+                    placeholder="Número celular"
+                    required>
+
+                    <select name="metodo_acceso" required>
+
+                        <option value="">
+                            Método de acceso
+                        </option>
+
+                        <option value="transferencia">
+                            Transferencia bancaria
+                        </option>
+
+                    </select>
+
+                    <div>
+                        <p class="transfer-text" style="color: #ff9999; opacity: 1; font-weight: 500;">
+                            * Una vez completado el registro, es obligatorio enviar la captura de tu transferencia al WhatsApp oficial del evento para recibir tu acceso digital.
+                        </p>
+                    </div>
+
+                    <div class="checkbox-row" style="display: grid; grid-template-columns: auto 1fr; align-items: center; gap: 10px;">
+
+                        <input 
+                        type="checkbox"
+                        id="adultCheck"
+                        required>
+
+                        <label for="adultCheck">
+                            Confirmo que soy mayor de 18 años y entiendo que se requerirá identificación oficial.
+                        </label>
+
+                    </div>
+
+                    <button type="submit" class="submit-ticket">
+                        Registrar acceso
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <footer>
+        DIAMA — INTERNET CULTURE / RAVE / COMMUNITY
+    </footer>
+
+    <script>
+
+        const overlay = document.getElementById("overlay");
+        const ticketOverlay = document.getElementById("ticketOverlay");
+
+        function openOverlay(){
+            overlay.classList.add("active");
+        }
+
+        function closeOverlay(){
+            overlay.classList.remove("active");
+        }
+
+        function openTicketOverlay(){
+            ticketOverlay.classList.add("active");
+        }
+
+        function closeTicketOverlay(){
+            ticketOverlay.classList.remove("active");
+        }
+
+        function scrollToPachuca(){
+
+            document.getElementById("pachuca-section").scrollIntoView({
+                behavior:"smooth"
+            });
+
+        }
+
+    </script>
+
+</body>
+</html>
