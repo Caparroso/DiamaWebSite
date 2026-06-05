@@ -468,13 +468,6 @@
             background:#111;
         }
 
-        /* Optimización estética específica para el input file */
-        .ticket-form input[type="file"] {
-            padding: 14px;
-            font-size: 0.9rem;
-            cursor: pointer;
-        }
-
         .transfer-text{
             font-size:.9rem;
             opacity:.7;
@@ -953,7 +946,7 @@
 
                 </div>
 
-                <form class="ticket-form" action="https://formspree.io/f/xojzqblp" method="POST" enctype="multipart/form-data">
+                <form class="ticket-form" action="https://formspree.io/f/xojzqblp" method="POST">
 
                     <input 
                     type="text" 
@@ -980,17 +973,9 @@
                     </select>
 
                     <div>
-
-                        <input 
-                        type="file"
-                        name="comprobante_transferencia"
-                        accept="image/*">
-
-                        <p class="transfer-text">
-                            En caso de realizar transferencia,
-                            selecciona la captura o foto del comprobante arriba.
+                        <p class="transfer-text" style="color: #ff9999; opacity: 1; font-weight: 500;">
+                            * Una vez completado el registro, es obligatorio enviar la captura de tu transferencia al WhatsApp oficial del evento para recibir tu acceso digital.
                         </p>
-
                     </div>
 
                     <div class="checkbox-row" style="display: grid; grid-template-columns: auto 1fr; align-items: center; gap: 10px;">
