@@ -347,6 +347,23 @@
             transform: translateX(3px);
         }
 
+        /* APARTADO SOPORTE / QUEJAS */
+        .support-box {
+            text-align: center;
+            padding: 40px 20px;
+            max-width: 600px;
+            margin: 0 auto;
+            opacity: 0.5;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            line-height: 1.6;
+            transition: opacity 0.3s;
+        }
+        
+        .support-box:hover {
+            opacity: 0.8;
+        }
+
         /* OVERLAYS (FIX PRINCIPAL: SE SUBIÓ EL Z-INDEX A 999999) */
 
         .overlay{
@@ -567,7 +584,7 @@
         /* FOOTER */
 
         footer{
-            padding:70px 20px;
+            padding:40px 20px 70px;
             text-align:center;
             font-size:.9rem;
             opacity:.3;
@@ -717,12 +734,12 @@
 
             <div class="hero-buttons">
 
-                <button onclick="openOverlay()">
-                    DIAMA QUERÉTARO
-                </button>
-
                 <button onclick="scrollToPachuca()">
                     DIAMA PACHUCA
+                </button>
+
+                <button onclick="openOverlay()">
+                    DIAMA QUERÉTARO
                 </button>
 
                 <button>
@@ -788,18 +805,6 @@
 
         <div class="events-grid">
 
-            <div class="event-card event-clickable" onclick="openOverlay()">
-
-                <h3>
-                    DIAMA QUERÉTARO — EDICIÓN 001
-                </h3>
-
-                <p>
-                    Queretaro Experiencia 001
-                </p>
-
-            </div>
-
             <div class="event-card">
 
                 <h3>
@@ -845,6 +850,18 @@
                     </div>
 
                 </div>
+
+            </div>
+
+            <div class="event-card event-clickable" onclick="openOverlay()">
+
+                <h3>
+                    DIAMA QUERÉTARO — EDICIÓN 001
+                </h3>
+
+                <p>
+                    Queretaro Experiencia 001
+                </p>
 
             </div>
 
@@ -923,6 +940,10 @@
 
     </section>
 
+    <div class="support-box">
+        Quejas, dudas y aclaraciones al 7122644470
+    </div>
+
     <div class="overlay" id="overlay">
 
         <button class="overlay-close" onclick="closeOverlay()">
@@ -943,7 +964,7 @@
                     cultura rave, música electrónica emocional y estética
                     futurista inspirada en comunidades modernas del EDM.
 
-                    Este fue el inicio de un nuevo movimiento enfocado en
+                    Este fue el inicio de un nuevo movement enfocado en
                     internet culture, hyperpop, EDM y experiencias rave
                     experimentales dentro de México.
 
@@ -1072,8 +1093,11 @@
                         <br>
                         002180702274850419
                     </p>
+                    <p style="margin-top: 10px; font-size: 0.9rem; opacity: 0.9; color: #ccffcc;">
+                        A este número celular (56 3353 1575) deberán enviar el comprobante de pago de su transferencia.
+                    </p>
 
-                    <p>
+                    <p style="margin-top: 10px;">
                         <strong>Acceso preventa:</strong>
                         $80 MXN
                     </p>
@@ -1094,6 +1118,12 @@
                     placeholder="Número celular"
                     required>
 
+                    <input 
+                    type="text" 
+                    name="folio_transferencia"
+                    placeholder="Folio de transferencia"
+                    required>
+
                     <select name="metodo_acceso" required>
 
                         <option value="">
@@ -1108,7 +1138,7 @@
 
                     <div>
                         <p class="transfer-text" style="color: #ff9999; opacity: 1; font-weight: 500;">
-                            * Una vez completado el registro, es obligatorio enviar la captura de tu transferencia al WhatsApp oficial del evento para recibir tu acceso digital.
+                            * Una vez completado el registro con tu folio, es obligatorio enviar la captura de tu transferencia al WhatsApp oficial del evento (56 3353 1575) para recibir tu acceso digital.
                         </p>
                     </div>
 
