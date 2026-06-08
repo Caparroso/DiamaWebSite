@@ -18,7 +18,7 @@
             margin:0;
             padding:0;
             box-sizing:border-box;
-            -webkit-tap-highlight-color: transparent; /* Elimina el flash azul feo al tocar botones en Android/iOS */
+            -webkit-tap-highlight-color: transparent;
         }
 
         html{
@@ -118,7 +118,7 @@
             width:100%;
             padding:110px 40px;
             position:relative;
-            z-index:1; /* Capas reseteadas para no bloquear overlays */
+            z-index:1;
         }
 
         .section-title{
@@ -129,7 +129,7 @@
             text-shadow:0px 0px 15px rgba(0,0,0,0.35);
         }
 
-        /* GALLERY (CARRUSEL CINEMÁTICO HORIZONTAL ULTRA LENTO) */
+        /* GALLERY */
 
         .gallery-wrapper {
             width: 100%;
@@ -138,7 +138,6 @@
             padding: 10px 0;
         }
 
-        /* Desvanecido sutil en los extremos laterales */
         .gallery-wrapper::before,
         .gallery-wrapper::after {
             content: "";
@@ -163,7 +162,7 @@
             width: max-content;
             gap: 32px;
             animation: scrollInfiniteHorizontal 70s linear infinite;
-            will-change: transform; /* Optimización de hardware para fluidez en iOS/Android de 120Hz */
+            will-change: transform;
         }
 
         .gallery-track:hover {
@@ -194,12 +193,8 @@
         }
 
         @keyframes scrollInfiniteHorizontal {
-            0% {
-                transform: translateX(0);
-            }
-            100% {
-                transform: translateX(-50%); 
-            }
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
         }
 
         /* EVENTS */
@@ -273,6 +268,22 @@
             background:rgba(255,255,255,0.1);
         }
 
+        .phase.registration-highlight {
+            background: rgba(0, 240, 255, 0.07);
+            border: 1px solid rgba(0, 240, 255, 0.25);
+            box-shadow: inset 0 0 10px rgba(0, 240, 255, 0.05);
+        }
+
+        .phase.registration-highlight:hover {
+            background: rgba(0, 240, 255, 0.12);
+            border-color: rgba(0, 240, 255, 0.4);
+        }
+
+        .phase.registration-highlight span {
+            color: #00f0ff;
+            text-shadow: 0 0 10px rgba(0, 240, 255, 0.2);
+        }
+
         .phase.locked{
             opacity:.45;
             cursor:not-allowed;
@@ -283,11 +294,22 @@
             letter-spacing:1px;
         }
 
+        .phase span small {
+            font-size: 0.75rem;
+            opacity: 0.8;
+            margin-left: 5px;
+            letter-spacing: 0px;
+        }
+
+        .phase .price-tag {
+            font-weight: 700;
+        }
+
         .phase small{
             opacity:.7;
         }
 
-        /* APARTADO LINKS / SOCIAL (MINIMAL SOFT STYLE) */
+        /* LINKS / SOCIAL */
 
         .links-container {
             display: grid;
@@ -347,7 +369,8 @@
             transform: translateX(3px);
         }
 
-        /* APARTADO SOPORTE / QUEJAS */
+        /* SOPORTE */
+
         .support-box {
             text-align: center;
             padding: 40px 20px;
@@ -364,7 +387,7 @@
             opacity: 0.8;
         }
 
-        /* OVERLAYS (CAPA MÁXIMA PARA EVITAR SOPALAMIENTOS) */
+        /* OVERLAYS */
 
         .overlay{
             position:fixed;
@@ -374,7 +397,7 @@
             z-index:999999; 
             display:none;
             overflow-y:auto;
-            -webkit-overflow-scrolling: touch; /* Scroll nativo ultra suave en iPhones/iOS Safari */
+            -webkit-overflow-scrolling: touch;
         }
 
         .overlay.active{
@@ -391,7 +414,7 @@
             font-size:2rem;
             cursor:pointer;
             z-index:1000000;
-            padding:10px; /* Área de toque extendida para dedos en móvil */
+            padding:10px;
         }
 
         /* EVENT OVERLAY */
@@ -591,7 +614,7 @@
             letter-spacing:2px;
         }
 
-        /* RESPONSIVE MEDIA QUERIES (OPTIMIZACIÓN FULL PARA SMARTPHONES) */
+        /* RESPONSIVE MEDIA QUERIES */
 
         @media(max-width:950px){
 
@@ -621,7 +644,6 @@
                 text-align: center;
             }
 
-            /* Fix Carrusel */
             .gallery-wrapper::before,
             .gallery-wrapper::after {
                 width: 50px;
@@ -637,7 +659,6 @@
                 border-radius: 20px;
             }
 
-            /* Links Mobile Fix */
             .links-container {
                 grid-template-columns: 1fr;
                 gap: 30px;
@@ -652,7 +673,6 @@
                 padding: 16px 20px;
             }
 
-            /* Fix Overlays Móvil */
             .overlay-close {
                 top: 20px;
                 right: 20px;
@@ -684,7 +704,6 @@
                 padding: 40px 20px 80px 20px;
             }
 
-            /* Ticket form responsive fix */
             .ticket-wrapper {
                 padding: 70px 15px 40px 15px;
             }
@@ -735,7 +754,7 @@
             <div class="hero-buttons">
 
                 <button onclick="openTicketOverlay()">
-                    REGISTRO PACHUCA
+                    Registro/Preventa Pachuca
                 </button>
 
                 <button onclick="openOverlay()">
@@ -773,7 +792,6 @@
                 <div class="gallery-item">
                     <img src="FOTO4.JPG">
                 </div>
-
 
                 <div class="gallery-item">
                     <img src="FOTO1.JPG">
@@ -819,21 +837,31 @@
 
                 <div class="ticket-phases">
 
+                    <div class="phase unlocked registration-highlight" onclick="openTicketOverlay()">
+
+                        <span>REGISTRO COMPLETO <small>(Requisito de acceso)</small></span>
+
+                        <small>Abierto</small>
+
+                    </div>
+
+                    <!-- REABIERTA FASE 1 -->
                     <div class="phase unlocked" onclick="openTicketOverlay()">
 
                         <span>FASE 1</span>
 
-                        <strong>$80 MXN</strong>
+                        <strong class="price-tag">$80 MXN</strong>
 
                         <small>Disponible</small>
 
                     </div>
 
+                    <!-- CERRADA FASE 2 -->
                     <div class="phase locked">
 
                         <span>FASE 2</span>
 
-                        <strong>$100 MXN</strong>
+                        <strong class="price-tag">$95 MXN</strong>
 
                         <small>Bloqueada</small>
 
@@ -843,7 +871,7 @@
 
                         <span>FASE 3</span>
 
-                        <strong>$120 MXN</strong>
+                        <strong class="price-tag">$120 MXN</strong>
 
                         <small>Bloqueada</small>
 
@@ -853,18 +881,20 @@
 
             </div>
 
+            <!-- REGRESADO AL ESTADO ORIGINAL SIN BOTONES EXTRAS -->
             <div class="event-card event-clickable" onclick="openOverlay()">
 
                 <h3>
-                    DIAMA QUERÉTARO — EDICIÓN 001
+                    DIAMA QUERÉTARO
                 </h3>
 
                 <p>
-                    Queretaro Experiencia 001
+                    Querétaro Experiencia 001. Haz click para ver la galería del evento, artistas y recapitulación completa de la edición anterior.
                 </p>
 
             </div>
 
+            <!-- REGRESADO AL ESTADO ORIGINAL SOLO LOADING -->
             <div class="event-card loading">
 
                 <h3>
@@ -944,6 +974,7 @@
         Quejas, dudas y aclaraciones al 7122644470
     </div>
 
+    <!-- OVERLAY QUERÉTARO RECAP -->
     <div class="overlay" id="overlay">
 
         <button class="overlay-close" onclick="closeOverlay()">
@@ -959,15 +990,9 @@
                 </h2>
 
                 <p class="overlay-text">
-
-                    La primera edición de DIAMA en Querétaro reunió artistas,
-                    cultura rave, música electrónica emocional y estética
-                    futurista inspirada en comunidades modernas del EDM.
-
-                    Este fue el inicio de un nuevo movement enfocado en
-                    internet culture, hyperpop, EDM y experiencias rave
-                    experimentales dentro de México.
-
+                    La primera edición de DIAMA en Querétaro reunió artistas, cultura rave, música electrónica emocional y estética futurista inspirada en comunidades modernas del EDM.
+                    <br><br>
+                    Este fue el inicio de un nuevo movement enfocado en internet culture, hyperpop, EDM y experiencias rave experimentales dentro de México.
                 </p>
 
                 <div class="overlay-gallery">
@@ -1047,6 +1072,7 @@
 
     </div>
 
+    <!-- OVERLAY REGISTRO/PREVENTA ÚNICO -->
     <div class="overlay" id="ticketOverlay">
 
         <button class="overlay-close" onclick="closeTicketOverlay()">
@@ -1103,7 +1129,7 @@
                     </p>
 
                     <p style="margin-top: 10px;">
-                        <strong>Acceso preventa:</strong>
+                        <strong>Acceso preventa (Fase 1):</strong>
                         $80 MXN
                     </p>
 
@@ -1198,14 +1224,6 @@
 
         function closeTicketOverlay(){
             ticketOverlay.classList.remove("active");
-        }
-
-        function scrollToPachuca(){
-
-            document.getElementById("pachuca-section").scrollIntoView({
-                behavior:"smooth"
-            });
-
         }
 
     </script>
