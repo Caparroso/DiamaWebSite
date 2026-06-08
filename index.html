@@ -118,7 +118,7 @@
             width:100%;
             padding:110px 40px;
             position:relative;
-            z-index:1; /* Se bajó de 2 a 1 para que no tape a los overlays */
+            z-index:1; /* Capas reseteadas para no bloquear overlays */
         }
 
         .section-title{
@@ -364,14 +364,14 @@
             opacity: 0.8;
         }
 
-        /* OVERLAYS (FIX PRINCIPAL: SE SUBIÓ EL Z-INDEX A 999999) */
+        /* OVERLAYS (CAPA MÁXIMA PARA EVITAR SOPALAMIENTOS) */
 
         .overlay{
             position:fixed;
             inset:0;
             background:rgba(4,4,4,0.96);
             backdrop-filter:blur(18px);
-            z-index:999999; /* Forzado por encima de cualquier otro div o sección */
+            z-index:999999; 
             display:none;
             overflow-y:auto;
             -webkit-overflow-scrolling: touch; /* Scroll nativo ultra suave en iPhones/iOS Safari */
@@ -606,7 +606,7 @@
             }
 
             .hero-buttons button {
-                width: 100%; /* Botones en bloque completo para mejor área táctil en celular */
+                width: 100%; 
                 max-width: 290px;
                 padding: 14px 20px;
             }
@@ -734,8 +734,8 @@
 
             <div class="hero-buttons">
 
-                <button onclick="scrollToPachuca()">
-                    DIAMA PACHUCA
+                <button onclick="openTicketOverlay()">
+                    REGISTRO PACHUCA
                 </button>
 
                 <button onclick="openOverlay()">
@@ -1071,9 +1071,8 @@
                     Se requerirá identificación oficial para ingresar.
                 </p>
 
-                <p>
-                    La ubicación exacta del evento será enviada directamente
-                    al número celular registrado.
+                <p style="background: rgba(255, 255, 255, 0.08); padding: 15px; border-radius: 12px; border-left: 3px solid #ff9999; font-weight: 500; color: #ffcccc; font-size: 0.95rem;">
+                    * NOTA IMPORTANTE: Incluso si decides realizar tu pago directamente en la puerta (taquilla), es estrictamente obligatorio completar este registro para asegurar tu lugar en el evento, validar tu acceso y recibir la ubicación exacta.
                 </p>
 
                 <div class="payment-box">
@@ -1085,7 +1084,7 @@
 
                     <p>
                         <strong>Titular:</strong>
-                        Andrés Ortiz Ayala
+                        Andrés Ayala
                     </p>
 
                     <p>
@@ -1093,6 +1092,12 @@
                         <br>
                         002180702274850419
                     </p>
+
+                    <p>
+                        <strong>WhatsApp de Andrés:</strong>
+                        56 3353 1575
+                    </p>
+
                     <p style="margin-top: 10px; font-size: 0.9rem; opacity: 0.9; color: #ccffcc;">
                         A este número celular (56 3353 1575) deberán enviar el comprobante de pago de su transferencia.
                     </p>
@@ -1121,8 +1126,7 @@
                     <input 
                     type="text" 
                     name="folio_transferencia"
-                    placeholder="Folio de transferencia"
-                    required>
+                    placeholder="Folio de transferencia (Opcional si pagas en puerta)">
 
                     <select name="metodo_acceso" required>
 
@@ -1134,11 +1138,15 @@
                             Transferencia bancaria
                         </option>
 
+                        <option value="puerta">
+                            Pago en puerta (Taquilla)
+                        </option>
+
                     </select>
 
                     <div>
                         <p class="transfer-text" style="color: #ff9999; opacity: 1; font-weight: 500;">
-                            * Una vez completado el registro con tu folio, es obligatorio enviar la captura de tu transferencia al WhatsApp oficial del evento (56 3353 1575) para recibir tu acceso digital.
+                            * Si pagas por transferencia bancaria, es obligatorio enviar la captura de pantalla al WhatsApp oficial (56 3353 1575) para recibir tu acceso digital definitivo.
                         </p>
                     </div>
 
