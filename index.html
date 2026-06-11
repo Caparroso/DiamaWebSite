@@ -845,25 +845,23 @@
 
                     </div>
 
-                    <!-- REABIERTA FASE 1 -->
-                    <div class="phase unlocked" onclick="openTicketOverlay()">
+                    <div class="phase locked">
 
                         <span>FASE 1</span>
 
                         <strong class="price-tag">$80 MXN</strong>
 
-                        <small>Disponible</small>
+                        <small>Bloqueada</small>
 
                     </div>
 
-                    <!-- CERRADA FASE 2 -->
-                    <div class="phase locked">
+                    <div class="phase unlocked" onclick="openTicketOverlay()">
 
                         <span>FASE 2</span>
 
                         <strong class="price-tag">$95 MXN</strong>
 
-                        <small>Bloqueada</small>
+                        <small>Disponible</small>
 
                     </div>
 
@@ -881,7 +879,6 @@
 
             </div>
 
-            <!-- REGRESADO AL ESTADO ORIGINAL SIN BOTONES EXTRAS -->
             <div class="event-card event-clickable" onclick="openOverlay()">
 
                 <h3>
@@ -892,9 +889,8 @@
                     Querétaro 001. Haz click para ver la galería del evento, artistas y recapitulación de la edición anterior.
                 </p>
 
-            </div>
+                </div>
 
-            <!-- REGRESADO AL ESTADO ORIGINAL SOLO LOADING -->
             <div class="event-card loading">
 
                 <h3>
@@ -974,7 +970,6 @@
         Quejas, dudas y aclaraciones al 7122644470
     </div>
 
-    <!-- OVERLAY QUERÉTARO RECAP -->
     <div class="overlay" id="overlay">
 
         <button class="overlay-close" onclick="closeOverlay()">
@@ -1072,7 +1067,6 @@
 
     </div>
 
-    <!-- OVERLAY REGISTRO/PREVENTA ÚNICO -->
     <div class="overlay" id="ticketOverlay">
 
         <button class="overlay-close" onclick="closeTicketOverlay()">
@@ -1129,8 +1123,8 @@
                     </p>
 
                     <p style="margin-top: 10px;">
-                        <strong>Acceso preventa (Fase 1):</strong>
-                        $80 MXN
+                        <strong>Acceso preventa (Fase 2):</strong>
+                        $95 MXN
                     </p>
 
                 </div>
