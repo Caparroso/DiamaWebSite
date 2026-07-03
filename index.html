@@ -1,19 +1,15 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
     <title>DIAMA</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
     <style>
-
         *{
             margin:0;
             padding:0;
@@ -38,7 +34,6 @@
         }
 
         /* BACKGROUND */
-
         .background-image{
             position:fixed;
             inset:0;
@@ -55,12 +50,11 @@
         .background-overlay{
             position:fixed;
             inset:0;
-            background:rgba(0,0,0,0.18);
+            background:rgba(0,0,0,0.25);
             z-index:-2;
         }
 
-        /* HERO */
-
+        /* HERO - DIAMA X PRTTS */
         .hero{
             min-height:100vh;
             display:flex;
@@ -72,65 +66,111 @@
 
         .hero-content{
             max-width:950px;
+            width: 100%;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            letter-spacing: 8px;
+            font-weight: 700;
+            text-shadow: 0px 0px 30px rgba(255,255,255,0.2);
+            margin-bottom: 10px;
+        }
+
+        .hero .subtitle {
+            font-size: 1.2rem;
+            letter-spacing: 4px;
+            opacity: 0.8;
+            text-transform: uppercase;
+            margin-bottom: 40px;
         }
 
         .hero p{
-            font-size:1.05rem;
+            font-size:1.1rem;
             line-height:1.9;
             opacity:.92;
-            max-width:760px;
-            margin:auto;
-            margin-top:380px;
-            text-shadow:0px 0px 20px rgba(0,0,0,0.4);
+            max-width:660px;
+            margin: 0 auto 45px;
+            text-shadow:0px 0px 20px rgba(0,0,0,0.6);
         }
 
         .hero-buttons{
-            margin-top:45px;
             display:flex;
             justify-content:center;
-            gap:18px;
+            gap:20px;
             flex-wrap:wrap;
+            max-width: 700px;
+            margin: 0 auto;
         }
 
-        .hero-buttons button{
-            padding:15px 30px;
-            border:none;
+        .hero-buttons .btn-main{
+            padding:18px 36px;
             border-radius:999px;
-            background:rgba(255,255,255,0.08);
-            backdrop-filter:blur(16px);
+            background:rgba(255,255,255,0.1);
+            backdrop-filter:blur(20px);
             color:white;
             cursor:pointer;
-            transition:.35s;
-            border:1px solid rgba(255,255,255,0.12);
-            font-size:.95rem;
-            letter-spacing:1px;
+            transition:.35s cubic-bezier(0.25, 1, 0.5, 1);
+            border:1px solid rgba(255,255,255,0.2);
+            font-size:1rem;
+            letter-spacing:2px;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
         }
 
-        .hero-buttons button:hover{
+        .hero-buttons .btn-main:hover{
             transform:translateY(-4px);
-            background:rgba(255,255,255,0.13);
-            box-shadow:0px 0px 35px rgba(255,255,255,0.12);
+            background:rgba(255,255,255,0.2);
+            border-color: rgba(255,255,255,0.4);
+            box-shadow:0px 0px 40px rgba(255,255,255,0.25);
         }
 
         /* SECTIONS */
-
         .section{
             width:100%;
-            padding:110px 40px;
+            padding:90px 40px;
             position:relative;
             z-index:1;
         }
 
         .section-title{
             font-size:2rem;
-            margin-bottom:45px;
+            margin-bottom:15px;
             letter-spacing:4px;
             font-weight:600;
             text-shadow:0px 0px 15px rgba(0,0,0,0.35);
         }
 
-        /* GALLERY */
+        .section-desc {
+            font-size: 1rem;
+            opacity: 0.5;
+            margin-bottom: 45px;
+            letter-spacing: 1px;
+        }
 
+        /* FUTURE-PROOF REGIONAL HUBS */
+        .city-hub {
+            margin-bottom: 60px;
+            background: rgba(255, 255, 255, 0.02);
+            padding: 30px;
+            border-radius: 32px;
+            border: 1px solid rgba(255,255,255,0.04);
+        }
+
+        .city-hub-title {
+            font-size: 1.1rem;
+            letter-spacing: 3px;
+            opacity: 0.4;
+            margin-bottom: 25px;
+            font-weight: 700;
+            text-transform: uppercase;
+            border-left: 3px solid rgba(255,255,255,0.3);
+            padding-left: 12px;
+        }
+
+        /* GALLERY */
         .gallery-wrapper {
             width: 100%;
             overflow: hidden;
@@ -197,38 +237,70 @@
             100% { transform: translateX(-50%); }
         }
 
-        /* EVENTS */
-
+        /* EVENTS GRID */
         .events-grid{
             display:grid;
-            grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+            grid-template-columns:repeat(auto-fill,minmax(320px,1fr));
             gap:25px;
         }
 
         .event-card{
             padding:35px;
             border-radius:28px;
-            background:rgba(255,255,255,0.05);
+            background:rgba(255,255,255,0.04);
             backdrop-filter:blur(18px);
-            border:1px solid rgba(255,255,255,0.08);
-            transition:.35s;
-            min-height:260px;
+            border:1px solid rgba(255,255,255,0.06);
+            transition:.35s cubic-bezier(0.25, 1, 0.5, 1);
+            min-height:240px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
 
         .event-card:hover{
             transform:translateY(-6px);
+            background:rgba(255,255,255,0.07);
+            border-color: rgba(255,255,255,0.15);
             box-shadow:0px 0px 45px rgba(255,255,255,0.08);
         }
 
+        /* Variación estética para la edición actual activa */
+        .event-card.featured {
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.15);
+            box-shadow: 0 0 30px rgba(255,255,255,0.03);
+        }
+        
+        .event-card.featured:hover {
+            background: rgba(255,255,255,0.12);
+            border-color: rgba(255,255,255,0.25);
+        }
+
         .event-card h3{
-            font-size:1.5rem;
-            margin-bottom:20px;
+            font-size:1.4rem;
+            margin-bottom:15px;
             letter-spacing:2px;
         }
 
         .event-card p{
-            opacity:.82;
-            line-height:1.8;
+            opacity:.75;
+            line-height:1.7;
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+        }
+
+        .event-status {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 700;
+            opacity: 0.4;
+        }
+
+        .event-card.featured .event-status {
+            opacity: 0.9;
+            color: #fff;
+            text-shadow: 0 0 10px rgba(255,255,255,0.5);
         }
 
         .event-clickable{
@@ -236,11 +308,10 @@
         }
 
         .loading{
-            opacity:.5;
+            opacity:.35;
         }
 
         /* LINKS / SOCIAL */
-
         .links-container {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -300,7 +371,6 @@
         }
 
         /* SOPORTE */
-
         .support-box {
             text-align: center;
             padding: 40px 20px;
@@ -318,7 +388,6 @@
         }
 
         /* OVERLAYS */
-
         .overlay{
             position:fixed;
             inset:0;
@@ -348,7 +417,6 @@
         }
 
         /* EVENT OVERLAY */
-
         .overlay-container{
             display:grid;
             grid-template-columns:1.4fr .7fr;
@@ -392,7 +460,6 @@
         }
 
         /* ARTISTS */
-
         .artists-title{
             font-size:1.2rem;
             margin-bottom:25px;
@@ -435,7 +502,6 @@
         }
 
         /* FOOTER */
-
         footer{
             padding:40px 20px 70px;
             text-align:center;
@@ -445,33 +511,52 @@
         }
 
         /* RESPONSIVE MEDIA QUERIES */
-
         @media(max-width:950px){
+            .hero h1 {
+                font-size: 2.2rem;
+                letter-spacing: 4px;
+            }
+
+            .hero .subtitle {
+                font-size: 1rem;
+            }
 
             .hero p{
-                margin-top:260px;
                 font-size: 1rem;
                 padding: 0 10px;
+                margin-bottom: 35px;
             }
 
             .hero-buttons{
-                gap: 12px;
+                gap: 15px;
+                flex-direction: column;
+                align-items: center;
             }
 
-            .hero-buttons button {
+            .hero-buttons .btn-main {
                 width: 100%; 
-                max-width: 290px;
-                padding: 14px 20px;
+                max-width: 320px;
+                justify-content: center;
             }
 
             .section{
-                padding:70px 20px;
+                padding:60px 20px;
             }
 
             .section-title {
                 font-size: 1.6rem;
-                margin-bottom: 30px;
+                margin-bottom: 8px;
                 text-align: center;
+            }
+
+            .section-desc {
+                text-align: center;
+                margin-bottom: 35px;
+            }
+
+            .city-hub {
+                padding: 20px 15px;
+                border-radius: 24px;
             }
 
             .gallery-wrapper::before,
@@ -533,11 +618,8 @@
                 border-top:1px solid rgba(255,255,255,0.08);
                 padding: 40px 20px 80px 20px;
             }
-
         }
-
     </style>
-
 </head>
 
 <body>
@@ -548,40 +630,31 @@
 
     <div class="background-overlay"></div>
 
+    <!-- MAIN HERO (DIAMA X PRTTS) -->
     <section class="hero">
-
         <div class="hero-content">
-
+            <h1>DIAMA X PRTTS</h1>
+            <div class="subtitle">Querétaro — 17 de Junio</div>
+            
             <p>
-                Una nueva generación para la música electrónica en México.
+                Una nueva generación para la música electrónica en México. Accede a la revelación interactiva a través de Diamagochii y asegura tu lugar en el próximo stage.
             </p>
 
             <div class="hero-buttons">
-
-                <button onclick="openPachucaOverlay()">
-                    DIAMA PACHUCA
-                </button>
-
-                <button onclick="openOverlay()">
-                    DIAMA QUERÉTARO
-                </button>
-
-                <button>
-                    CDMX (LOADING)
-                </button>
-
+                <a href="https://caparroso.github.io/Registro-Diama-X-Prtts/" target="_blank" class="btn-main">
+                    REGISTRO DE ACCESO
+                </a>
+                <a href="https://caparroso.github.io/Diamagochii" target="_blank" class="btn-main">
+                    JUGAR DIAMAGOCHII
+                </a>
             </div>
-
         </div>
-
     </section>
 
+    <!-- HORIZONTAL INFINITE GALLERY -->
     <section class="section">
-
         <div class="gallery-wrapper">
-
             <div class="gallery-track">
-
                 <!-- Bloque Original de Querétaro -->
                 <div class="gallery-item"><img src="FOTO1.JPG"></div>
                 <div class="gallery-item"><img src="FOTO2.JPG"></div>
@@ -591,7 +664,7 @@
                 <div class="gallery-item"><img src="FOTO6.jpeg"></div>
                 <div class="gallery-item"><img src="FOTO7.jpeg"></div>
 
-                <!-- Bloque Nuevo de Pachuca (Corregido a .jpg) -->
+                <!-- Bloque Nuevo de Pachuca -->
                 <div class="gallery-item"><img src="FOTOP1.jpg"></div>
                 <div class="gallery-item"><img src="FOTOP2.jpg"></div>
                 <div class="gallery-item"><img src="FOTOP3.jpg"></div>
@@ -601,7 +674,7 @@
                 <div class="gallery-item"><img src="FOTOP7.jpg"></div>
                 <div class="gallery-item"><img src="FOTOP8.jpg"></div>
 
-                <!-- Duplicado idéntico para loop infinito sin cortes -->
+                <!-- Duplicado para loop infinito sin cortes -->
                 <div class="gallery-item"><img src="FOTO1.JPG"></div>
                 <div class="gallery-item"><img src="FOTO2.JPG"></div>
                 <div class="gallery-item"><img src="FOTO3.JPG"></div>
@@ -617,147 +690,138 @@
                 <div class="gallery-item"><img src="FOTOP6.jpg"></div>
                 <div class="gallery-item"><img src="FOTOP7.jpg"></div>
                 <div class="gallery-item"><img src="FOTOP8.jpg"></div>
-
             </div>
-
         </div>
-
     </section>
 
+    <!-- ARCHIVE & TIMELINE SECTION -->
     <section class="section" id="events-section">
+        <h3 class="section-title">EDICIONES DIAMA</h3>
+        <p class="section-desc">Historial cronológico y accesos por región.</p>
 
-        <h3 class="section-title">
-            EVENTOS
-        </h3>
+        <!-- NODO QUERÉTARO -->
+        <div class="city-hub">
+            <div class="city-hub-title">QUERÉTARO</div>
+            <div class="events-grid">
+                
+                <!-- Edición Actual Activa (DIAMA X PRTTS) -->
+                <div class="event-card featured">
+                    <div>
+                        <h3>DIAMA X PRTTS</h3>
+                        <p>Próxima edición en Querétaro. Videojuego de revelación interactivo y registro de accesos habilitado.</p>
+                    </div>
+                    <div class="event-status">Próximamente — 17 Jun</div>
+                </div>
 
-        <div class="events-grid">
+                <!-- Recapitulación QRO 001 -->
+                <div class="event-card event-clickable" onclick="openOverlay()">
+                    <div>
+                        <h3>QUERÉTARO — 001</h3>
+                        <p>Haz click para ver la galería completa del evento, lineup de artistas y recap de nuestra primera edición.</p>
+                    </div>
+                    <div class="event-status">Recapitulación</div>
+                </div>
 
-            <div class="event-card event-clickable" onclick="openPachucaOverlay()">
-
-                <h3>
-                    DIAMA PACHUCA
-                </h3>
-
-                <p>
-                    Pachuca 001. Haz click para ver la galería del evento, artistas y recapitulación de la edición anterior.
-                </p>
-
+                <!-- Espacio listo para clonar a futuro (QRO 003, etc.) -->
             </div>
+        </div>
 
-            <div class="event-card event-clickable" onclick="openOverlay()">
+        <!-- NODO PACHUCA -->
+        <div class="city-hub">
+            <div class="city-hub-title">PACHUCA</div>
+            <div class="events-grid">
+                
+                <!-- Recapitulación Pachuca 001 -->
+                <div class="event-card event-clickable" onclick="openPachucaOverlay()">
+                    <div>
+                        <h3>PACHUCA — 001</h3>
+                        <p>Haz click para ver la galería de fotos de la edición anterior, artistas y la expansión del sonido vanguardista.</p>
+                    </div>
+                    <div class="event-status">Recapitulación</div>
+                </div>
 
-                <h3>
-                    DIAMA QUERÉTARO
-                </h3>
-
-                <p>
-                    Querétaro 001. Haz click para ver la galería del evento, artistas y recapitulación de la edición anterior.
-                </p>
-
+                <!-- Espacio listo para clonar a futuro (Pachuca 002, etc.) -->
             </div>
+        </div>
 
-            <div class="event-card loading">
-
-                <h3>
-                    DIAMA CDMX
-                </h3>
-
-                <p>
-                    Loading...
-                </p>
-
+        <!-- NODO CDMX -->
+        <div class="city-hub">
+            <div class="city-hub-title">CDMX</div>
+            <div class="events-grid">
+                <div class="event-card loading">
+                    <div>
+                        <h3>CDMX — 001</h3>
+                        <p>Planificando la expansión del ecosistema underground en la capital.</p>
+                    </div>
+                    <div class="event-status">Loading...</div>
+                </div>
             </div>
-
         </div>
 
     </section>
 
+    <!-- NETWORKS -->
     <section class="section">
-
         <h3 class="section-title">NETWORKS</h3>
-
         <div class="links-container">
-
             <div class="links-column">
                 <h4>Comunidades</h4>
                 <div class="links-list">
-
                     <a href="https://chat.whatsapp.com/HOFefUDzZOXJ9gKKYtsP5O" target="_blank" class="link-item">
                         <span class="link-label">WhatsApp Diama Pachuca</span>
                         <span class="link-arrow">→</span>
                     </a>
-
                     <a href="https://chat.whatsapp.com/IBigBkWJuHhEhQOitnE1Pi" target="_blank" class="link-item">
                         <span class="link-label">WhatsApp Diama Querétaro</span>
                         <span class="link-arrow">→</span>
                     </a>
-
                     <a href="https://chat.whatsapp.com/IBigBkWJuHhEhQOitnE1Pi" target="_blank" class="link-item">
                         <span class="link-label">WhatsApp Diama Comunidad</span>
                         <span class="link-arrow">→</span>
                     </a>
-
                     <a href="https://discord.gg/2SBrKVW6c" target="_blank" class="link-item">
                         <span class="link-label">Discord Server</span>
                         <span class="link-arrow">→</span>
                     </a>
-
                 </div>
             </div>
 
             <div class="links-column">
                 <h4>Plataformas</h4>
                 <div class="links-list">
-
                     <a href="https://www.instagram.com/diamaaaaaaaaaa/" target="_blank" class="link-item">
                         <span class="link-label">Instagram</span>
                         <span class="link-arrow">→</span>
                     </a>
-
                     <a href="https://www.tiktok.com/@diamadiamadiama" target="_blank" class="link-item">
                         <span class="link-label">TikTok</span>
                         <span class="link-arrow">→</span>
                     </a>
-
                     <a href="https://www.youtube.com/@Diamaaaa" target="_blank" class="link-item">
                         <span class="link-label">YouTube Channel</span>
                         <span class="link-arrow">→</span>
                     </a>
-
                 </div>
             </div>
-
         </div>
-
     </section>
 
     <div class="support-box">
         Quejas, dudas y aclaraciones al 7122644470
     </div>
 
-    <!-- OVERLAY PACHUCA (Galería corregida a .jpg) -->
+    <!-- OVERLAY PACHUCA -->
     <div class="overlay" id="pachucaOverlay">
-
-        <button class="overlay-close" onclick="closePachucaOverlay()">
-            ×
-        </button>
-
+        <button class="overlay-close" onclick="closePachucaOverlay()">×</button>
         <div class="overlay-container">
-
             <div class="overlay-left">
-
-                <h2 class="overlay-title">
-                    DIAMA PACHUCA — EDICIÓN 001
-                </h2>
-
+                <h2 class="overlay-title">DIAMA PACHUCA — EDICIÓN 001</h2>
                 <p class="overlay-text">
                     La primera edición de DIAMA en Pachuca consolidó nuestra presencia expandiendo el sonido vanguardista. Un espacio donde convergieron ritmos latinos experimentales, quiebres de drum and bass y la crudeza del techno industrial.
                     <br><br>
                     Esta recapitulación plasma la energía de una comunidad unida por el baile, la cultura de internet y la evolución de las experiencias rave en Hidalgo.
                 </p>
-
                 <div class="overlay-gallery">
-
                     <img src="FOTOP1.jpg">
                     <img src="FOTOP2.jpg">
                     <img src="FOTOP3.jpg">
@@ -766,17 +830,10 @@
                     <img src="FOTOP6.jpg">
                     <img src="FOTOP7.jpg">
                     <img src="FOTOP8.jpg">
-
                 </div>
-
             </div>
-
             <div class="overlay-right">
-
-                <h3 class="artists-title">
-                    ARTISTAS
-                </h3>
-
+                <h3 class="artists-title">ARTISTAS</h3>
                 <div class="artist-card">
                     <div class="artist-image"></div>
                     <div class="artist-info">
@@ -784,7 +841,6 @@
                         <p>Ttrival MX / Club Latino / D&B</p>
                     </div>
                 </div>
-
                 <div class="artist-card">
                     <div class="artist-image"></div>
                     <div class="artist-info">
@@ -792,7 +848,6 @@
                         <p>Hard Techno / Techno</p>
                     </div>
                 </div>
-
                 <div class="artist-card">
                     <div class="artist-image"></div>
                     <div class="artist-info">
@@ -800,7 +855,6 @@
                         <p>Cumbia Extravaganza / UK garage / D&B / IDM</p>
                     </div>
                 </div>
-
                 <div class="artist-card">
                     <div class="artist-image"></div>
                     <div class="artist-info">
@@ -808,7 +862,6 @@
                         <p>Tech House / Break Beat / D&B</p>
                     </div>
                 </div>
-
                 <div class="artist-card">
                     <div class="artist-image"></div>
                     <div class="artist-info">
@@ -816,52 +869,31 @@
                         <p>Tech House / Break Beat / D&B</p>
                     </div>
                 </div>
-
             </div>
-
         </div>
-
     </div>
 
     <!-- OVERLAY QUERÉTARO -->
     <div class="overlay" id="overlay">
-
-        <button class="overlay-close" onclick="closeOverlay()">
-            ×
-        </button>
-
+        <button class="overlay-close" onclick="closeOverlay()">×</button>
         <div class="overlay-container">
-
             <div class="overlay-left">
-
-                <h2 class="overlay-title">
-                    DIAMA QUERÉTARO — EDICIÓN 001
-                </h2>
-
+                <h2 class="overlay-title">DIAMA QUERÉTARO — EDICIÓN 001</h2>
                 <p class="overlay-text">
                     La primera edición de DIAMA en Querétaro reunió artistas, cultura rave, música electrónica emocional y estética futurista inspirada en comunidades modernas del EDM.
                     <br><br>
                     Este fue el inicio de un nuevo movement enfocado en internet culture, hyperpop, EDM y experiencias rave experimentales dentro de México.
                 </p>
-
                 <div class="overlay-gallery">
-
                     <img src="FOTO1.JPG">
                     <img src="FOTO2.JPG">
                     <img src="FOTO5.jpeg">
                     <img src="FOTO6.jpeg">
                     <img src="FOTO7.jpeg">
-
                 </div>
-
             </div>
-
             <div class="overlay-right">
-
-                <h3 class="artists-title">
-                    ARTISTAS
-                </h3>
-
+                <h3 class="artists-title">ARTISTAS</h3>
                 <div class="artist-card">
                     <div class="artist-image"></div>
                     <div class="artist-info">
@@ -869,7 +901,6 @@
                         <p>Ambient / EDM / Internet Core</p>
                     </div>
                 </div>
-
                 <div class="artist-card">
                     <div class="artist-image"></div>
                     <div class="artist-info">
@@ -877,7 +908,6 @@
                         <p>Tech House / Psytrance / EDM</p>
                     </div>
                 </div>
-
                 <div class="artist-card">
                     <div class="artist-image"></div>
                     <div class="artist-info">
@@ -885,7 +915,6 @@
                         <p>Hyperpop / Dembow / EDM</p>
                     </div>
                 </div>
-
                 <div class="artist-card">
                     <div class="artist-image"></div>
                     <div class="artist-info">
@@ -893,7 +922,6 @@
                         <p>Cumbia Extravaganza / UK Drill / Hyperpop</p>
                     </div>
                 </div>
-
                 <div class="artist-card">
                     <div class="artist-image"></div>
                     <div class="artist-info">
@@ -901,11 +929,8 @@
                         <p>Dubstep / EDM / Hard Techno</p>
                     </div>
                 </div>
-
             </div>
-
         </div>
-
     </div>
 
     <footer>
@@ -913,7 +938,6 @@
     </footer>
 
     <script>
-
         const overlay = document.getElementById("overlay");
         const pachucaOverlay = document.getElementById("pachucaOverlay");
 
@@ -932,8 +956,6 @@
         function closePachucaOverlay(){
             pachucaOverlay.classList.remove("active");
         }
-
     </script>
-
 </body>
 </html>
