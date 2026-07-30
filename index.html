@@ -1,941 +1,485 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>DIAMA</title>
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
-    <style>
-        *{
-            margin:0;
-            padding:0;
-            box-sizing:border-box;
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        html{
-            scroll-behavior:smooth;
-        }
-
-        body{
-            font-family:'Inter', sans-serif;
-            color:white;
-            overflow-x:hidden;
-            background:#000;
-        }
-
-        a{
-            text-decoration:none;
-            color:inherit;
-        }
-
-        /* BACKGROUND */
-        .background-image{
-            position:fixed;
-            inset:0;
-            z-index:-3;
-        }
-
-        .background-image img{
-            width:100vw;
-            height:100vh;
-            object-fit:cover;
-            image-rendering:auto;
-        }
-
-        .background-overlay{
-            position:fixed;
-            inset:0;
-            background:rgba(0,0,0,0.25);
-            z-index:-2;
-        }
-
-        /* HERO - DIAMA X PRTTS */
-        .hero{
-            min-height:100vh;
-            display:flex;
-            justify-content:center;
-            align-items:center;
-            text-align:center;
-            padding:120px 20px 80px;
-        }
-
-        .hero-content{
-            max-width:950px;
-            width: 100%;
-        }
-
-        .hero h1 {
-            font-size: 3.5rem;
-            letter-spacing: 8px;
-            font-weight: 700;
-            text-shadow: 0px 0px 30px rgba(255,255,255,0.2);
-            margin-bottom: 10px;
-        }
-
-        .hero .subtitle {
-            font-size: 1.2rem;
-            letter-spacing: 4px;
-            opacity: 0.8;
-            text-transform: uppercase;
-            margin-bottom: 40px;
-        }
-
-        .hero p{
-            font-size:1.1rem;
-            line-height:1.9;
-            opacity:.92;
-            max-width:660px;
-            margin: 0 auto 45px;
-            text-shadow:0px 0px 20px rgba(0,0,0,0.6);
-        }
-
-        .hero-buttons{
-            display:flex;
-            justify-content:center;
-            gap:20px;
-            flex-wrap:wrap;
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        .hero-buttons .btn-main{
-            padding:18px 36px;
-            border-radius:999px;
-            background:rgba(255,255,255,0.1);
-            backdrop-filter:blur(20px);
-            color:white;
-            cursor:pointer;
-            transition:.35s cubic-bezier(0.25, 1, 0.5, 1);
-            border:1px solid rgba(255,255,255,0.2);
-            font-size:1rem;
-            letter-spacing:2px;
-            font-weight: 600;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .hero-buttons .btn-main:hover{
-            transform:translateY(-4px);
-            background:rgba(255,255,255,0.2);
-            border-color: rgba(255,255,255,0.4);
-            box-shadow:0px 0px 40px rgba(255,255,255,0.25);
-        }
-
-        /* SECTIONS */
-        .section{
-            width:100%;
-            padding:90px 40px;
-            position:relative;
-            z-index:1;
-        }
-
-        .section-title{
-            font-size:2rem;
-            margin-bottom:15px;
-            letter-spacing:4px;
-            font-weight:600;
-            text-shadow:0px 0px 15px rgba(0,0,0,0.35);
-        }
-
-        .section-desc {
-            font-size: 1rem;
-            opacity: 0.5;
-            margin-bottom: 45px;
-            letter-spacing: 1px;
-        }
-
-        /* FUTURE-PROOF REGIONAL HUBS */
-        .city-hub {
-            margin-bottom: 60px;
-            background: rgba(255, 255, 255, 0.02);
-            padding: 30px;
-            border-radius: 32px;
-            border: 1px solid rgba(255,255,255,0.04);
-        }
-
-        .city-hub-title {
-            font-size: 1.1rem;
-            letter-spacing: 3px;
-            opacity: 0.4;
-            margin-bottom: 25px;
-            font-weight: 700;
-            text-transform: uppercase;
-            border-left: 3px solid rgba(255,255,255,0.3);
-            padding-left: 12px;
-        }
-
-        /* GALLERY */
-        .gallery-wrapper {
-            width: 100%;
-            overflow: hidden;
-            position: relative;
-            padding: 10px 0;
-        }
-
-        .gallery-wrapper::before,
-        .gallery-wrapper::after {
-            content: "";
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            width: 150px;
-            z-index: 3;
-            pointer-events: none;
-        }
-        .gallery-wrapper::before {
-            left: 0;
-            background: linear-gradient(to right, #000 0%, rgba(0,0,0,0) 100%);
-        }
-        .gallery-wrapper::after {
-            right: 0;
-            background: linear-gradient(to left, #000 0%, rgba(0,0,0,0) 100%);
-        }
-
-        .gallery-track {
-            display: flex;
-            width: max-content;
-            gap: 32px;
-            animation: scrollInfiniteHorizontal 90s linear infinite;
-            will-change: transform;
-        }
-
-        .gallery-track:hover {
-            animation-play-state: paused;
-        }
-
-        .gallery-item{
-            width: 580px;
-            height: 340px;
-            overflow:hidden;
-            border-radius:24px;
-            position:relative;
-            background:rgba(255,255,255,0.05);
-            backdrop-filter:blur(10px);
-            border:1px solid rgba(255,255,255,0.08);
-            flex-shrink: 0;
-        }
-
-        .gallery-item img{
-            width:100%;
-            height:100%;
-            object-fit:cover;
-            transition: 1.2s cubic-bezier(0.25, 1, 0.5, 1);
-        }
-
-        .gallery-item:hover img{
-            transform:scale(1.04);
-        }
-
-        @keyframes scrollInfiniteHorizontal {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-        }
-
-        /* EVENTS GRID */
-        .events-grid{
-            display:grid;
-            grid-template-columns:repeat(auto-fill,minmax(320px,1fr));
-            gap:25px;
-        }
-
-        .event-card{
-            padding:35px;
-            border-radius:28px;
-            background:rgba(255,255,255,0.04);
-            backdrop-filter:blur(18px);
-            border:1px solid rgba(255,255,255,0.06);
-            transition:.35s cubic-bezier(0.25, 1, 0.5, 1);
-            min-height:240px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        .event-card:hover{
-            transform:translateY(-6px);
-            background:rgba(255,255,255,0.07);
-            border-color: rgba(255,255,255,0.15);
-            box-shadow:0px 0px 45px rgba(255,255,255,0.08);
-        }
-
-        .event-card.featured {
-            background: rgba(255,255,255,0.08);
-            border: 1px solid rgba(255,255,255,0.15);
-            box-shadow: 0 0 30px rgba(255,255,255,0.03);
-        }
-        
-        .event-card.featured:hover {
-            background: rgba(255,255,255,0.12);
-            border-color: rgba(255,255,255,0.25);
-        }
-
-        .event-card h3{
-            font-size:1.4rem;
-            margin-bottom:15px;
-            letter-spacing:2px;
-        }
-
-        .event-card p{
-            opacity:.75;
-            line-height:1.7;
-            font-size: 0.95rem;
-            margin-bottom: 20px;
-        }
-
-        .event-status {
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            font-weight: 700;
-            opacity: 0.4;
-        }
-
-        .event-card.featured .event-status {
-            opacity: 0.9;
-            color: #fff;
-            text-shadow: 0 0 10px rgba(255,255,255,0.5);
-        }
-
-        .event-clickable{
-            cursor:pointer;
-        }
-
-        .loading{
-            opacity:.35;
-        }
-
-        /* LINKS / SOCIAL */
-        .links-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-            max-width: 1100px;
-            margin: 0 auto;
-        }
-
-        .links-column h4 {
-            font-size: 0.85rem;
-            letter-spacing: 3px;
-            opacity: 0.4;
-            margin-bottom: 25px;
-            font-weight: 600;
-            text-transform: uppercase;
-        }
-
-        .links-list {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        .link-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 24px;
-            border-radius: 16px;
-            background: rgba(255,255,255,0.03);
-            border: 1px solid rgba(255,255,255,0.06);
-            backdrop-filter: blur(10px);
-            transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
-        }
-
-        .link-item:hover {
-            background: rgba(255,255,255,0.08);
-            border-color: rgba(255,255,255,0.15);
-            transform: translateX(4px);
-        }
-
-        .link-label {
-            font-size: 0.95rem;
-            font-weight: 500;
-            letter-spacing: 1px;
-        }
-
-        .link-arrow {
-            font-size: 0.85rem;
-            opacity: 0.3;
-            transition: 0.3s;
-        }
-
-        .link-item:hover .link-arrow {
-            opacity: 1;
-            transform: translateX(3px);
-        }
-
-        /* SOPORTE */
-        .support-box {
-            text-align: center;
-            padding: 40px 20px;
-            max-width: 600px;
-            margin: 0 auto;
-            opacity: 0.5;
-            font-size: 0.9rem;
-            letter-spacing: 1px;
-            line-height: 1.6;
-            transition: opacity 0.3s;
-        }
-        
-        .support-box:hover {
-            opacity: 0.8;
-        }
-
-        /* OVERLAYS */
-        .overlay{
-            position:fixed;
-            inset:0;
-            background:rgba(4,4,4,0.96);
-            backdrop-filter:blur(18px);
-            z-index:999999; 
-            display:none;
-            overflow-y:auto;
-            -webkit-overflow-scrolling: touch;
-        }
-
-        .overlay.active{
-            display:block;
-        }
-
-        .overlay-close{
-            position:absolute;
-            top:35px;
-            right:40px;
-            border:none;
-            background:none;
-            color:white;
-            font-size:2rem;
-            cursor:pointer;
-            z-index:1000000;
-            padding:10px;
-        }
-
-        /* EVENT OVERLAY */
-        .overlay-container{
-            display:grid;
-            grid-template-columns:1.4fr .7fr;
-            min-height:100vh;
-        }
-
-        .overlay-left{
-            padding:120px 60px;
-        }
-
-        .overlay-right{
-            padding:120px 35px;
-            border-left:1px solid rgba(255,255,255,0.08);
-            background:rgba(255,255,255,0.03);
-        }
-
-        .overlay-title{
-            font-size:3rem;
-            margin-bottom:25px;
-            letter-spacing:5px;
-        }
-
-        .overlay-text{
-            max-width:800px;
-            line-height:1.9;
-            opacity:.82;
-            margin-bottom:55px;
-        }
-
-        .overlay-gallery{
-            display:grid;
-            grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-            gap:22px;
-        }
-
-        .overlay-gallery img{
-            width:100%;
-            height:320px;
-            object-fit:cover;
-            border-radius:24px;
-        }
-
-        /* ARTISTS */
-        .artists-title{
-            font-size:1.2rem;
-            margin-bottom:25px;
-            letter-spacing:2px;
-        }
-
-        .artist-card{
-            display:flex;
-            align-items:center;
-            gap:16px;
-            padding:16px;
-            border-radius:20px;
-            background:rgba(255,255,255,0.05);
-            border:1px solid rgba(255,255,255,0.08);
-            margin-bottom:15px;
-            transition:.3s;
-            cursor:pointer;
-        }
-
-        .artist-card:hover{
-            transform:translateX(5px);
-            background:rgba(255,255,255,0.08);
-        }
-
-        .artist-image{
-            width:62px;
-            height:62px;
-            border-radius:50%;
-            background:rgba(255,255,255,0.1);
-        }
-
-        .artist-info h4{
-            margin-bottom:5px;
-            letter-spacing:1px;
-        }
-
-        .artist-info p{
-            font-size:.9rem;
-            opacity:.7;
-        }
-
-        /* FOOTER */
-        footer{
-            padding:40px 20px 70px;
-            text-align:center;
-            font-size:.9rem;
-            opacity:.3;
-            letter-spacing:2px;
-        }
-
-        /* RESPONSIVE MEDIA QUERIES */
-        @media(max-width:950px){
-            .hero h1 {
-                font-size: 2.2rem;
-                letter-spacing: 4px;
-            }
-
-            .hero .subtitle {
-                font-size: 1rem;
-            }
-
-            .hero p{
-                font-size: 1rem;
-                padding: 0 10px;
-                margin-bottom: 35px;
-            }
-
-            .hero-buttons{
-                gap: 15px;
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .hero-buttons .btn-main {
-                width: 100%; 
-                max-width: 320px;
-                justify-content: center;
-            }
-
-            .section{
-                padding:60px 20px;
-            }
-
-            .section-title {
-                font-size: 1.6rem;
-                margin-bottom: 8px;
-                text-align: center;
-            }
-
-            .section-desc {
-                text-align: center;
-                margin-bottom: 35px;
-            }
-
-            .city-hub {
-                padding: 20px 15px;
-                border-radius: 24px;
-            }
-
-            .gallery-wrapper::before,
-            .gallery-wrapper::after {
-                width: 50px;
-            }
-
-            .gallery-track {
-                gap: 16px;
-            }
-
-            .gallery-item {
-                width: 85vw;
-                height: 240px;
-                border-radius: 20px;
-            }
-
-            .links-container {
-                grid-template-columns: 1fr;
-                gap: 30px;
-            }
-
-            .links-column h4 {
-                margin-bottom: 15px;
-                text-align: center;
-            }
-
-            .link-item {
-                padding: 16px 20px;
-            }
-
-            .overlay-close {
-                top: 20px;
-                right: 20px;
-                font-size: 2.5rem;
-            }
-
-            .overlay-container{
-                grid-template-columns:1fr;
-            }
-
-            .overlay-left {
-                padding: 90px 20px 40px 20px;
-            }
-
-            .overlay-title {
-                font-size: 1.8rem;
-                letter-spacing: 2px;
-                line-height: 1.3;
-            }
-
-            .overlay-text {
-                margin-bottom: 35px;
-                font-size: 0.95rem;
-            }
-
-            .overlay-right{
-                border-left:none;
-                border-top:1px solid rgba(255,255,255,0.08);
-                padding: 40px 20px 80px 20px;
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="DIAMA: música electrónica, cultura de internet, experiencias rave y videojuegos.">
+  <meta name="theme-color" content="#050505">
+  <title>DIAMA — Games, eventos y comunidad</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#050505;
+      --surface:rgba(255,255,255,.055);
+      --surface-strong:rgba(255,255,255,.1);
+      --line:rgba(255,255,255,.13);
+      --muted:rgba(255,255,255,.66);
+      --cyan:#8be9ff;
+      --violet:#c4a7ff;
+      --radius:28px;
+      --max:1180px;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth;scroll-padding-top:100px}
+    body{
+      min-width:280px;
+      overflow-x:hidden;
+      background:var(--bg);
+      color:#fff;
+      font-family:Inter,system-ui,sans-serif;
+      line-height:1.6;
+    }
+    body.dialog-open{overflow:hidden}
+    a{color:inherit;text-decoration:none}
+    button{font:inherit}
+    img{display:block;max-width:100%}
+    :focus-visible{outline:2px solid var(--cyan);outline-offset:4px}
+    .skip-link{
+      position:fixed;left:18px;top:-80px;z-index:9999;
+      padding:12px 18px;background:#fff;color:#000;border-radius:99px;
+    }
+    .skip-link:focus{top:18px}
+    .ambient{
+      position:fixed;inset:0;z-index:-3;background:#050505;
+    }
+    .ambient::before{
+      content:"";position:absolute;inset:0;
+      background:
+        linear-gradient(180deg,rgba(0,0,0,.25),#050505 92%),
+        url("Imagenes/DiamaQueretaro001/DIAMAXP.png") center/cover;
+      opacity:.72;
+    }
+    .ambient::after{
+      content:"";position:absolute;inset:0;
+      background:
+        radial-gradient(circle at 18% 22%,rgba(139,233,255,.16),transparent 27%),
+        radial-gradient(circle at 82% 35%,rgba(196,167,255,.14),transparent 29%);
+    }
+    .site-nav{
+      position:fixed;left:50%;top:18px;z-index:100;
+      width:min(calc(100% - 28px),var(--max));transform:translateX(-50%);
+      display:flex;align-items:center;justify-content:space-between;gap:24px;
+      padding:12px 14px 12px 20px;border:1px solid var(--line);
+      border-radius:999px;background:rgba(5,5,5,.7);
+      backdrop-filter:blur(22px);box-shadow:0 12px 50px rgba(0,0,0,.24);
+    }
+    .brand{font-size:1rem;font-weight:800;letter-spacing:.28em}
+    .nav-links{display:flex;align-items:center;gap:4px}
+    .nav-links a{
+      padding:9px 13px;border-radius:999px;color:var(--muted);
+      font-size:.78rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;
+    }
+    .nav-links a:hover{background:var(--surface-strong);color:#fff}
+    .nav-cta{border:1px solid var(--line)}
+    main{overflow:hidden}
+    .hero{
+      min-height:100svh;display:grid;place-items:center;text-align:center;
+      padding:150px 24px 90px;
+    }
+    .hero-inner{width:min(900px,100%)}
+    .eyebrow{
+      display:inline-flex;align-items:center;gap:10px;margin-bottom:24px;
+      font-size:.72rem;font-weight:700;letter-spacing:.25em;text-transform:uppercase;color:rgba(255,255,255,.72);
+    }
+    .eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--cyan);box-shadow:0 0 20px var(--cyan)}
+    h1{
+      font-size:clamp(3.2rem,10vw,8.2rem);line-height:.88;letter-spacing:-.07em;
+      text-wrap:balance;text-shadow:0 12px 70px rgba(0,0,0,.35);
+    }
+    .hero-subtitle{
+      margin:26px auto 0;font-size:clamp(1.15rem,2vw,1.55rem);
+      font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+    }
+    .hero-copy{max-width:650px;margin:20px auto 0;color:rgba(255,255,255,.78);font-size:1.05rem}
+    .actions{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:34px}
+    .button{
+      min-height:52px;display:inline-flex;align-items:center;justify-content:center;gap:10px;
+      padding:14px 22px;border:1px solid var(--line);border-radius:999px;
+      background:rgba(255,255,255,.08);color:#fff;cursor:pointer;
+      font-size:.78rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+      transition:transform .25s,background .25s,border-color .25s;
+    }
+    .button:hover{transform:translateY(-3px);background:rgba(255,255,255,.15);border-color:rgba(255,255,255,.3)}
+    .button-primary{background:#fff;color:#050505;border-color:#fff}
+    .button-primary:hover{background:#dff8ff;border-color:#dff8ff}
+    .scroll-cue{display:block;margin:65px auto 0;color:rgba(255,255,255,.5);font-size:.68rem;letter-spacing:.2em;text-transform:uppercase}
+    .section{padding:100px 24px;position:relative}
+    .section-inner{width:min(100%,var(--max));margin:0 auto}
+    .section-heading{display:flex;justify-content:space-between;align-items:end;gap:32px;margin-bottom:42px}
+    .section-kicker{color:var(--cyan);font-size:.72rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;margin-bottom:10px}
+    h2{font-size:clamp(2rem,5vw,4.4rem);line-height:1;letter-spacing:-.055em}
+    .section-description{max-width:500px;color:var(--muted)}
+    .games-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px}
+    .game-card{
+      position:relative;min-height:440px;display:flex;flex-direction:column;justify-content:flex-end;
+      overflow:hidden;padding:36px;border:1px solid var(--line);border-radius:var(--radius);
+      background:
+        radial-gradient(circle at 75% 15%,rgba(139,233,255,.2),transparent 34%),
+        rgba(8,8,8,.82);
+      transition:transform .35s,border-color .35s;
+    }
+    .game-card:nth-child(2){background:radial-gradient(circle at 75% 15%,rgba(196,167,255,.24),transparent 36%),rgba(8,8,8,.82)}
+    .game-card:hover{transform:translateY(-7px);border-color:rgba(255,255,255,.3)}
+    .game-number{
+      position:absolute;right:24px;top:10px;font-size:9rem;font-weight:800;
+      line-height:1;color:rgba(255,255,255,.035);letter-spacing:-.09em;
+    }
+    .game-tag{margin-bottom:auto;color:rgba(255,255,255,.58);font-size:.7rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase}
+    .game-card h3{font-size:clamp(2rem,4vw,3.4rem);letter-spacing:-.05em;line-height:1}
+    .game-card p{max-width:470px;margin:16px 0 24px;color:var(--muted)}
+    .game-card .button{align-self:flex-start}
+    .city-list{display:grid;gap:20px}
+    .city{
+      padding:28px;border-radius:var(--radius);border:1px solid var(--line);
+      background:rgba(5,5,5,.67);backdrop-filter:blur(18px);
+    }
+    .city-header{display:flex;align-items:center;justify-content:space-between;gap:20px;margin-bottom:22px}
+    .city-name{font-size:.78rem;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:rgba(255,255,255,.58)}
+    .city-count{font-size:.72rem;color:rgba(255,255,255,.4)}
+    .events-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}
+    .event-card{
+      width:100%;min-height:235px;display:flex;flex-direction:column;justify-content:space-between;
+      text-align:left;color:#fff;padding:26px;border:1px solid rgba(255,255,255,.09);
+      border-radius:22px;background:var(--surface);cursor:pointer;
+      transition:transform .25s,background .25s,border-color .25s;
+    }
+    .event-card:hover{transform:translateY(-4px);background:var(--surface-strong);border-color:rgba(255,255,255,.22)}
+    .event-card.featured{background:linear-gradient(135deg,rgba(139,233,255,.13),rgba(196,167,255,.1))}
+    .event-label{font-size:.67rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.54)}
+    .event-card h3{font-size:1.45rem;line-height:1.12;letter-spacing:-.03em;margin:12px 0}
+    .event-card p{font-size:.92rem;color:var(--muted)}
+    .event-action{margin-top:24px;font-size:.7rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase}
+    .gallery{display:grid;grid-template-columns:repeat(12,1fr);grid-auto-rows:180px;gap:14px}
+    .gallery figure{overflow:hidden;border-radius:20px;border:1px solid var(--line);background:#111}
+    .gallery figure:nth-child(1),.gallery figure:nth-child(4){grid-column:span 7;grid-row:span 2}
+    .gallery figure:nth-child(2),.gallery figure:nth-child(3){grid-column:span 5}
+    .gallery figure:nth-child(5){grid-column:span 5;grid-row:span 2}
+    .gallery figure:nth-child(6),.gallery figure:nth-child(7){grid-column:span 7}
+    .gallery img{width:100%;height:100%;object-fit:cover;transition:transform .6s}
+    .gallery figure:hover img{transform:scale(1.035)}
+    .networks{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px}
+    .network-group{padding:26px;border:1px solid var(--line);border-radius:var(--radius);background:rgba(5,5,5,.65)}
+    .network-group h3{font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:16px}
+    .network-link{display:flex;justify-content:space-between;align-items:center;padding:16px 4px;border-top:1px solid rgba(255,255,255,.09)}
+    .network-link:hover span:last-child{transform:translateX(4px)}
+    .network-link span:last-child{transition:transform .2s;color:var(--cyan)}
+    footer{padding:55px 24px 75px;text-align:center;color:rgba(255,255,255,.45);font-size:.72rem;letter-spacing:.18em;text-transform:uppercase}
+    .dialog{
+      width:100%;height:100%;max-width:none;max-height:none;margin:0;padding:0;
+      border:0;background:rgba(3,3,3,.97);color:#fff;overflow:auto;
+    }
+    .dialog::backdrop{background:#000}
+    .dialog-close{
+      position:fixed;right:24px;top:24px;z-index:5;width:48px;height:48px;
+      border:1px solid var(--line);border-radius:50%;background:rgba(0,0,0,.72);
+      color:#fff;cursor:pointer;font-size:1.5rem;line-height:1;
+    }
+    .dialog-layout{width:min(100%,1300px);min-height:100%;margin:0 auto;display:grid;grid-template-columns:minmax(0,1.5fr) minmax(290px,.6fr)}
+    .dialog-main{padding:100px 50px 70px}
+    .dialog-side{padding:100px 30px 70px;border-left:1px solid var(--line);background:rgba(255,255,255,.025)}
+    .dialog h2{margin-bottom:22px}
+    .dialog-copy{max-width:760px;margin-bottom:36px;color:var(--muted)}
+    .artist-list{display:grid;gap:10px}
+    .artist{padding:16px;border:1px solid rgba(255,255,255,.09);border-radius:16px;background:var(--surface)}
+    .artist strong{display:block;font-size:.88rem;letter-spacing:.08em;text-transform:uppercase}
+    .video{aspect-ratio:16/9;overflow:hidden;border-radius:22px;border:1px solid var(--line);background:#000}
+    .video iframe{width:100%;height:100%;border:0}
+    .dialog-gallery{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+    .dialog-gallery img{width:100%;height:300px;object-fit:cover;border-radius:18px}
+    .secret-panel{margin-top:32px;padding:28px;border:1px solid var(--line);border-radius:22px;background:linear-gradient(135deg,rgba(139,233,255,.1),rgba(196,167,255,.08))}
+    .secret-panel p{margin:10px 0 20px;color:var(--muted)}
+    @media(max-width:820px){
+      .nav-links a:not(.nav-cta){display:none}
+      .site-nav{padding-left:18px}
+      .hero{padding-top:130px}
+      .section{padding:75px 18px}
+      .section-heading{display:block}
+      .section-description{margin-top:18px}
+      .games-grid,.events-grid,.networks{grid-template-columns:1fr}
+      .game-card{min-height:390px;padding:28px}
+      .city{padding:18px}
+      .gallery{grid-template-columns:1fr;grid-auto-rows:260px}
+      .gallery figure:nth-child(n){grid-column:auto;grid-row:auto}
+      .dialog-layout{grid-template-columns:1fr}
+      .dialog-main{padding:90px 20px 45px}
+      .dialog-side{padding:38px 20px 70px;border-left:0;border-top:1px solid var(--line)}
+      .dialog-gallery{grid-template-columns:1fr}
+    }
+    @media(prefers-reduced-motion:reduce){
+      html{scroll-behavior:auto}
+      *,*::before,*::after{scroll-behavior:auto!important;transition:none!important;animation:none!important}
+    }
+  </style>
 </head>
-
 <body>
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
+  <div class="ambient" aria-hidden="true"></div>
 
-    <div class="background-image">
-        <img src="DIAMAXP.png" alt="">
+  <nav class="site-nav" aria-label="Navegación principal">
+    <a class="brand" href="#inicio" aria-label="DIAMA, inicio">DIAMA.</a>
+    <div class="nav-links">
+      <a href="#games">Games</a>
+      <a href="#ediciones">Ediciones</a>
+      <a href="#archivo">Archivo</a>
+      <a href="#comunidad">Comunidad</a>
+      <a class="nav-cta" href="https://caparroso.github.io/DiamaDungeon/" target="_blank" rel="noopener noreferrer">Entrar al juego</a>
     </div>
+  </nav>
 
-    <div class="background-overlay"></div>
-
-    <section class="hero">
-        <div class="hero-content">
-            <h1>DIAMA X PRTTS</h1>
-            <div class="subtitle">Querétaro — 17 de Julio</div>
-            
-            <p>
-                Una nueva generación para la música electrónica en México. Accede a la revelación interactiva a través de Diamagochii y asegura tu lugar en el próximo stage.
-            </p>
-
-            <div class="hero-buttons">
-                <a href="https://caparroso.github.io/Registro-Diama-X-Prtts/" target="_blank" class="btn-main">
-                    REGISTRO DE ACCESO
-                </a>
-                <a href="https://caparroso.github.io/Diamagochii" target="_blank" class="btn-main">
-                    JUGAR DIAMAGOCHII
-                </a>
-            </div>
+  <main id="contenido">
+    <header class="hero" id="inicio">
+      <div class="hero-inner">
+        <p class="eyebrow">Próxima transmisión</p>
+        <h1>DIAMA<br>× CENIZA</h1>
+        <p class="hero-subtitle">La ciudad se revela jugando</p>
+        <p class="hero-copy">Fecha, sede y acceso permanecen ocultos. Entra a Diama Dungeon y descubre el próximo pop-up de DIAMA antes que nadie.</p>
+        <div class="actions">
+          <a class="button button-primary" href="https://caparroso.github.io/DiamaDungeon/" target="_blank" rel="noopener noreferrer">Jugar Diama Dungeon <span aria-hidden="true">↗</span></a>
+          <a class="button" href="#games">Explorar DIAMA Games</a>
         </div>
+        <a class="scroll-cue" href="#games">Descender ↓</a>
+      </div>
+    </header>
+
+    <section class="section" id="games">
+      <div class="section-inner">
+        <div class="section-heading">
+          <div><p class="section-kicker">Play the signal</p><h2>DIAMA GAMES</h2></div>
+          <p class="section-description">Juegos conectados con el universo DIAMA. Cuida un PRRT digital o atraviesa el dungeon para desbloquear lo que viene.</p>
+        </div>
+        <div class="games-grid">
+          <article class="game-card">
+            <span class="game-number" aria-hidden="true">01</span>
+            <p class="game-tag">Digital companion</p>
+            <h3>DIAMAGOCHII</h3>
+            <p>Un PRRT nacido de la cultura de internet. Entra, juega y mantén viva la señal.</p>
+            <a class="button" href="https://caparroso.github.io/Diamagochii" target="_blank" rel="noopener noreferrer">Jugar ahora <span aria-hidden="true">↗</span></a>
+          </article>
+          <article class="game-card">
+            <span class="game-number" aria-hidden="true">02</span>
+            <p class="game-tag">Event reveal / CDMX</p>
+            <h3>DIAMA DUNGEON</h3>
+            <p>Explora el dungeon y encuentra la revelación del próximo pop-up de DIAMA × CENIZA.</p>
+            <a class="button button-primary" href="https://caparroso.github.io/DiamaDungeon/" target="_blank" rel="noopener noreferrer">Entrar al dungeon <span aria-hidden="true">↗</span></a>
+          </article>
+        </div>
+      </div>
     </section>
 
-    <section class="section">
-        <div class="gallery-wrapper">
-            <div class="gallery-track">
-                <div class="gallery-item"><img src="FOTO1.JPG"></div>
-                <div class="gallery-item"><img src="FOTO2.JPG"></div>
-                <div class="gallery-item"><img src="FOTO3.JPG"></div>
-                <div class="gallery-item"><img src="FOTO4.JPG"></div>
-                <div class="gallery-item"><img src="FOTO5.jpeg"></div>
-                <div class="gallery-item"><img src="FOTO6.jpeg"></div>
-                <div class="gallery-item"><img src="FOTO7.jpeg"></div>
-
-                <div class="gallery-item"><img src="FOTOP1.jpg"></div>
-                <div class="gallery-item"><img src="FOTOP2.jpg"></div>
-                <div class="gallery-item"><img src="FOTOP3.jpg"></div>
-                <div class="gallery-item"><img src="FOTOP4.jpg"></div>
-                <div class="gallery-item"><img src="FOTOP5.jpg"></div>
-                <div class="gallery-item"><img src="FOTOP6.jpg"></div>
-                <div class="gallery-item"><img src="FOTOP7.jpg"></div>
-                <div class="gallery-item"><img src="FOTOP8.jpg"></div>
-
-                <div class="gallery-item"><img src="FOTO1.JPG"></div>
-                <div class="gallery-item"><img src="FOTO2.JPG"></div>
-                <div class="gallery-item"><img src="FOTO3.JPG"></div>
-                <div class="gallery-item"><img src="FOTO4.JPG"></div>
-                <div class="gallery-item"><img src="FOTO5.jpeg"></div>
-                <div class="gallery-item"><img src="FOTO6.jpeg"></div>
-                <div class="gallery-item"><img src="FOTO7.jpeg"></div>
-                <div class="gallery-item"><img src="FOTOP1.jpg"></div>
-                <div class="gallery-item"><img src="FOTOP2.jpg"></div>
-                <div class="gallery-item"><img src="FOTOP3.jpg"></div>
-                <div class="gallery-item"><img src="FOTOP4.jpg"></div>
-                <div class="gallery-item"><img src="FOTOP5.jpg"></div>
-                <div class="gallery-item"><img src="FOTOP6.jpg"></div>
-                <div class="gallery-item"><img src="FOTOP7.jpg"></div>
-                <div class="gallery-item"><img src="FOTOP8.jpg"></div>
-            </div>
+    <section class="section" id="ediciones">
+      <div class="section-inner">
+        <div class="section-heading">
+          <div><p class="section-kicker">Regional archive</p><h2>EDICIONES DIAMA</h2></div>
+          <p class="section-description">Eventos, artistas y registros de cada ciudad. Abre una edición para ver su historia completa.</p>
         </div>
-    </section>
-
-    <section class="section" id="events-section">
-        <h3 class="section-title">EDICIONES DIAMA</h3>
-        <p class="section-desc">Historial cronológico y accesos por región.</p>
-
-        <div class="city-hub">
-            <div class="city-hub-title">QUERÉTARO</div>
+        <div class="city-list">
+          <article class="city">
+            <div class="city-header"><h3 class="city-name">Querétaro</h3><span class="city-count">2 ediciones</span></div>
             <div class="events-grid">
-                
-                <div class="event-card featured">
-                    <div>
-                        <h3>DIAMA X PRTTS</h3>
-                        <p>Próxima edición en Querétaro. Videojuego de revelación interactivo y registro de accesos habilitado.</p>
-                    </div>
-                    <div class="event-status">Próximamente — 17 Jul</div>
-                </div>
-
-                <div class="event-card event-clickable" onclick="openOverlay()">
-                    <div>
-                        <h3>QUERÉTARO — 001</h3>
-                        <p>Haz click para ver la galería completa del evento, lineup de artistas y recap de nuestra primera edición.</p>
-                    </div>
-                    <div class="event-status">Recapitulación</div>
-                </div>
+              <button class="event-card featured" type="button" data-dialog="prrts-dialog">
+                <div><span class="event-label">17.07.2026 / Recap</span><h3>DIAMA × PRRTS</h3><p>Seis artistas, una comunidad y el set de CAPARROSO como registro audiovisual de la noche.</p></div>
+                <span class="event-action">Ver recapitulación →</span>
+              </button>
+              <button class="event-card" type="button" data-dialog="queretaro-dialog">
+                <div><span class="event-label">Edición 001 / Recap</span><h3>DIAMA QUERÉTARO 001</h3><p>El inicio de una experiencia rave conectada con la cultura de internet y la música electrónica emocional.</p></div>
+                <span class="event-action">Ver archivo →</span>
+              </button>
             </div>
-        </div>
-
-        <div class="city-hub">
-            <div class="city-hub-title">PACHUCA</div>
+          </article>
+          <article class="city">
+            <div class="city-header"><h3 class="city-name">Pachuca</h3><span class="city-count">1 edición</span></div>
             <div class="events-grid">
-                
-                <div class="event-card event-clickable" onclick="openPachucaOverlay()">
-                    <div>
-                        <h3>PACHUCA — 001</h3>
-                        <p>Haz click para ver la galería de fotos de la edición anterior, artistas y la expansión del sonido y estetica de Diama.</p>
-                    </div>
-                    <div class="event-status">Recapitulación</div>
-                </div>
+              <button class="event-card" type="button" data-dialog="pachuca-dialog">
+                <div><span class="event-label">Edición 001 / Recap</span><h3>DIAMA PACHUCA 001</h3><p>Ritmos latinos experimentales, drum and bass y techno industrial en Hidalgo.</p></div>
+                <span class="event-action">Ver archivo →</span>
+              </button>
             </div>
-        </div>
-
-        <div class="city-hub">
-            <div class="city-hub-title">CDMX</div>
+          </article>
+          <article class="city">
+            <div class="city-header"><h3 class="city-name">CDMX</h3><span class="city-count">Señal activa</span></div>
             <div class="events-grid">
-                <div class="event-card loading">
-                    <div>
-                        <h3>CDMX — 001</h3>
-                        <p>Planificando la expansión del ecosistema underground en la capital.</p>
-                    </div>
-                    <div class="event-status">Loading...</div>
-                </div>
+              <button class="event-card featured" type="button" data-dialog="cdmx-dialog">
+                <div><span class="event-label">Pop-up / Revelación interactiva</span><h3>DIAMA × CENIZA</h3><p>La primera señal de DIAMA en CDMX está dentro de Diama Dungeon. El evento todavía no sucede.</p></div>
+                <span class="event-action">Abrir transmisión →</span>
+              </button>
             </div>
+          </article>
         </div>
-
+      </div>
     </section>
 
-    <section class="section">
-        <h3 class="section-title">NETWORKS</h3>
-        <div class="links-container">
-            <div class="links-column">
-                <h4>Comunidades</h4>
-                <div class="links-list">
-                    <a href="https://chat.whatsapp.com/HOFefUDzZOXJ9gKKYtsP5O" target="_blank" class="link-item">
-                        <span class="link-label">WhatsApp Diama Pachuca</span>
-                        <span class="link-arrow">→</span>
-                    </a>
-                    <a href="https://chat.whatsapp.com/IBigBkWJuHhEhQOitnE1Pi" target="_blank" class="link-item">
-                        <span class="link-label">WhatsApp Diama Querétaro</span>
-                        <span class="link-arrow">→</span>
-                    </a>
-                    <a href="https://chat.whatsapp.com/IBigBkWJuHhEhQOitnE1Pi" target="_blank" class="link-item">
-                        <span class="link-label">WhatsApp Diama Comunidad</span>
-                        <span class="link-arrow">→</span>
-                    </a>
-                    <a href="https://discord.gg/2SBrKVW6c" target="_blank" class="link-item">
-                        <span class="link-label">Discord Server</span>
-                        <span class="link-arrow">→</span>
-                    </a>
-                </div>
-            </div>
-
-            <div class="links-column">
-                <h4>Plataformas</h4>
-                <div class="links-list">
-                    <a href="https://www.instagram.com/diamaaaaaaaaaa/" target="_blank" class="link-item">
-                        <span class="link-label">Instagram</span>
-                        <span class="link-arrow">→</span>
-                    </a>
-                    <a href="https://www.tiktok.com/@diamadiamadiama" target="_blank" class="link-item">
-                        <span class="link-label">TikTok</span>
-                        <span class="link-arrow">→</span>
-                    </a>
-                    <a href="https://www.youtube.com/@Diamaaaa" target="_blank" class="link-item">
-                        <span class="link-label">YouTube Channel</span>
-                        <span class="link-arrow">→</span>
-                    </a>
-                </div>
-            </div>
+    <section class="section" id="archivo">
+      <div class="section-inner">
+        <div class="section-heading">
+          <div><p class="section-kicker">Memory fragments</p><h2>ARCHIVO VISUAL</h2></div>
+          <p class="section-description">Fragmentos de las primeras ediciones de DIAMA en Querétaro y Pachuca.</p>
         </div>
+        <div class="gallery">
+          <figure><img src="Imagenes/DiamaQueretaro001/FOTO1.JPG" alt="Público durante DIAMA Querétaro" loading="lazy"></figure>
+          <figure><img src="Imagenes/Diama Pachuca 001/FOTOP1.jpg" alt="Escena de DIAMA Pachuca" loading="lazy"></figure>
+          <figure><img src="Imagenes/DiamaQueretaro001/FOTO5.jpeg" alt="Presentación en DIAMA Querétaro" loading="lazy"></figure>
+          <figure><img src="Imagenes/Diama Pachuca 001/FOTOP4.jpg" alt="Público de DIAMA Pachuca" loading="lazy"></figure>
+          <figure><img src="Imagenes/Diama Pachuca 001/FOTOP6.jpg" alt="Artista durante DIAMA Pachuca" loading="lazy"></figure>
+          <figure><img src="Imagenes/DiamaQueretaro001/FOTO7.jpeg" alt="Luces de DIAMA Querétaro" loading="lazy"></figure>
+          <figure><img src="Imagenes/Diama Pachuca 001/FOTOP8.jpg" alt="Recapitulación de DIAMA Pachuca" loading="lazy"></figure>
+        </div>
+      </div>
     </section>
 
-    <div class="support-box">
-        Quejas, dudas y aclaraciones al 7122644470
-    </div>
-
-    <div class="overlay" id="pachucaOverlay">
-        <button class="overlay-close" onclick="closePachucaOverlay()">×</button>
-        <div class="overlay-container">
-            <div class="overlay-left">
-                <h2 class="overlay-title">DIAMA PACHUCA — EDICIÓN 001</h2>
-                <p class="overlay-text">
-                    La primera edición de DIAMA en Pachuca consolidó nuestra presence expandiendo el sonido caracteristico de Diama. Un espacio donde convergieron ritmos latinos experimentales, quiebres de drum and bass y la crudeza del techno industrial.
-                    <br><br>
-                    Esta recapitulación plasma la energía de una comunidad unida por el baile, la cultura de internet y la evolución de las experiencias rave en Hidalgo.
-                </p>
-                <div class="overlay-gallery">
-                    <img src="FOTOP1.jpg">
-                    <img src="FOTOP2.jpg">
-                    <img src="FOTOP3.jpg">
-                    <img src="FOTOP4.jpg">
-                    <img src="FOTOP5.jpg">
-                    <img src="FOTOP6.jpg">
-                    <img src="FOTOP7.jpg">
-                    <img src="FOTOP8.jpg">
-                </div>
-            </div>
-            <div class="overlay-right">
-                <h3 class="artists-title">ARTISTAS</h3>
-                <div class="artist-card">
-                    <div class="artist-image"></div>
-                    <div class="artist-info">
-                        <h4>Grupo Precario</h4>
-                        <p>Ttrival MX / Club Latino / D&B</p>
-                    </div>
-                </div>
-                <div class="artist-card">
-                    <div class="artist-image"></div>
-                    <div class="artist-info">
-                        <h4>Amnoizex x Wvy Loasean</h4>
-                        <p>Hard Techno / Techno</p>
-                    </div>
-                </div>
-                <div class="artist-card">
-                    <div class="artist-image"></div>
-                    <div class="artist-info">
-                        <h4>BreakMadre x Caparroso</h4>
-                        <p>Cumbia Extravaganza / UK garage / D&B / IDM</p>
-                    </div>
-                </div>
-                <div class="artist-card">
-                    <div class="artist-image"></div>
-                    <div class="artist-info">
-                        <h4>Awexa x andrésestr3s</h4>
-                        <p>Tech House / Break Beat / D&B</p>
-                    </div>
-                </div>
-                <div class="artist-card">
-                    <div class="artist-image"></div>
-                    <div class="artist-info">
-                        <h4>Kinychbeat x FireflyLight</h4>
-                        <p>Tech House / Break Beat / D&B</p>
-                    </div>
-                </div>
-            </div>
+    <section class="section" id="comunidad">
+      <div class="section-inner">
+        <div class="section-heading">
+          <div><p class="section-kicker">Stay connected</p><h2>COMUNIDAD</h2></div>
+          <p class="section-description">Conecta con las comunidades regionales y sigue las próximas transmisiones de DIAMA.</p>
         </div>
-    </div>
-
-    <div class="overlay" id="overlay">
-        <button class="overlay-close" onclick="closeOverlay()">×</button>
-        <div class="overlay-container">
-            <div class="overlay-left">
-                <h2 class="overlay-title">DIAMA QUERÉTARO — EDICIÓN 001</h2>
-                <p class="overlay-text">
-                    La primera edición de DIAMA en Querétaro reunió artistas, cultura rave, música electrónica emocional y estética futurista inspirada en comunidades modernas del EDM.
-                    <br><br>
-                    Este fue el inicio de un nuevo movement enfocado en internet culture, hyperpop, EDM y experiencias rave experimentales dentro de México.
-                </p>
-                <div class="overlay-gallery">
-                    <img src="FOTO1.JPG">
-                    <img src="FOTO2.JPG">
-                    <img src="FOTO5.jpeg">
-                    <img src="FOTO6.jpeg">
-                    <img src="FOTO7.jpeg">
-                </div>
-            </div>
-            <div class="overlay-right">
-                <h3 class="artists-title">ARTISTAS</h3>
-                <div class="artist-card">
-                    <div class="artist-image"></div>
-                    <div class="artist-info">
-                        <h4>CAPARROSO</h4>
-                        <p>Ambient / EDM / Internet Core</p>
-                    </div>
-                </div>
-                <div class="artist-card">
-                    <div class="artist-image"></div>
-                    <div class="artist-info">
-                        <h4>ANDRESESTR3S</h4>
-                        <p>Tech House / Psytrance / EDM</p>
-                    </div>
-                </div>
-                <div class="artist-card">
-                    <div class="artist-image"></div>
-                    <div class="artist-info">
-                        <h4>FIREFLYLIGHT</h4>
-                        <p>Hyperpop / Dembow / EDM</p>
-                    </div>
-                </div>
-                <div class="artist-card">
-                    <div class="artist-image"></div>
-                    <div class="artist-info">
-                        <h4>BREAKMADRE</h4>
-                        <p>Cumbia Extravaganza / UK Drill / Hyperpop</p>
-                    </div>
-                </div>
-                <div class="artist-card">
-                    <div class="artist-image"></div>
-                    <div class="artist-info">
-                        <h4>Kinychbeat</h4>
-                        <p>Dubstep / EDM / Hard Techno</p>
-                    </div>
-                </div>
-            </div>
+        <div class="networks">
+          <div class="network-group">
+            <h3>Comunidades</h3>
+            <a class="network-link" href="https://chat.whatsapp.com/HOFefUDzZOXJ9gKKYtsP5O" target="_blank" rel="noopener noreferrer"><span>WhatsApp Pachuca</span><span aria-hidden="true">↗</span></a>
+            <a class="network-link" href="https://chat.whatsapp.com/IBigBkWJuHhEhQOitnE1Pi" target="_blank" rel="noopener noreferrer"><span>WhatsApp Querétaro / Comunidad</span><span aria-hidden="true">↗</span></a>
+            <a class="network-link" href="https://discord.gg/2SBrKVW6c" target="_blank" rel="noopener noreferrer"><span>Discord</span><span aria-hidden="true">↗</span></a>
+          </div>
+          <div class="network-group">
+            <h3>Plataformas</h3>
+            <a class="network-link" href="https://www.instagram.com/diamaaaaaaaaaa/" target="_blank" rel="noopener noreferrer"><span>Instagram</span><span aria-hidden="true">↗</span></a>
+            <a class="network-link" href="https://www.tiktok.com/@diamadiamadiama" target="_blank" rel="noopener noreferrer"><span>TikTok</span><span aria-hidden="true">↗</span></a>
+            <a class="network-link" href="https://www.youtube.com/@Diamaaaa" target="_blank" rel="noopener noreferrer"><span>YouTube</span><span aria-hidden="true">↗</span></a>
+          </div>
         </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>DIAMA — Internet culture / Rave / Community · Contacto 712 264 4470</footer>
+
+  <dialog class="dialog" id="prrts-dialog" aria-labelledby="prrts-title">
+    <button class="dialog-close" type="button" data-close aria-label="Cerrar recapitulación">×</button>
+    <div class="dialog-layout">
+      <div class="dialog-main">
+        <p class="section-kicker">Querétaro / 17.07.2026</p>
+        <h2 id="prrts-title">DIAMA × PRRTS</h2>
+        <p class="dialog-copy">Una edición construida desde la colaboración, el baile y la comunidad. Revive la noche con el set completo de CAPARROSO.</p>
+        <div class="video">
+          <iframe src="https://www.youtube-nocookie.com/embed/34grCgtIvF4?start=13" title="CAPARROSO — DIAMA x PRRTS, Querétaro, 17 de julio de 2026" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        </div>
+      </div>
+      <aside class="dialog-side">
+        <p class="section-kicker">Lineup</p>
+        <div class="artist-list">
+          <div class="artist"><strong>Caparroso</strong></div>
+          <div class="artist"><strong>Kinychbeat</strong></div>
+          <div class="artist"><strong>FireflyLight</strong></div>
+          <div class="artist"><strong>Andresestr3s</strong></div>
+          <div class="artist"><strong>Grupo Precario</strong></div>
+          <div class="artist"><strong>Break Madre</strong></div>
+        </div>
+      </aside>
     </div>
+  </dialog>
 
-    <footer>
-        DIAMA — INTERNET CULTURE / RAVE / COMMUNITY
-    </footer>
+  <dialog class="dialog" id="queretaro-dialog" aria-labelledby="queretaro-title">
+    <button class="dialog-close" type="button" data-close aria-label="Cerrar archivo">×</button>
+    <div class="dialog-layout">
+      <div class="dialog-main">
+        <p class="section-kicker">Archivo / Edición 001</p>
+        <h2 id="queretaro-title">DIAMA QUERÉTARO</h2>
+        <p class="dialog-copy">La primera edición en Querétaro reunió música electrónica emocional, estética futurista y cultura de internet. Fue el inicio de una comunidad enfocada en experiencias rave experimentales dentro de México.</p>
+        <div class="dialog-gallery">
+          <img src="Imagenes/DiamaQueretaro001/FOTO1.JPG" alt="DIAMA Querétaro 001" loading="lazy">
+          <img src="Imagenes/DiamaQueretaro001/FOTO2.JPG" alt="Público en DIAMA Querétaro 001" loading="lazy">
+          <img src="Imagenes/DiamaQueretaro001/FOTO5.jpeg" alt="Presentación en DIAMA Querétaro 001" loading="lazy">
+          <img src="Imagenes/DiamaQueretaro001/FOTO6.jpeg" alt="Escena en DIAMA Querétaro 001" loading="lazy">
+        </div>
+      </div>
+      <aside class="dialog-side">
+        <p class="section-kicker">Artistas</p>
+        <div class="artist-list">
+          <div class="artist"><strong>Caparroso</strong></div>
+          <div class="artist"><strong>Andresestr3s</strong></div>
+          <div class="artist"><strong>FireflyLight</strong></div>
+          <div class="artist"><strong>BreakMadre</strong></div>
+          <div class="artist"><strong>Kinychbeat</strong></div>
+        </div>
+      </aside>
+    </div>
+  </dialog>
 
-    <script>
-        const overlay = document.getElementById("overlay");
-        const pachucaOverlay = document.getElementById("pachucaOverlay");
+  <dialog class="dialog" id="pachuca-dialog" aria-labelledby="pachuca-title">
+    <button class="dialog-close" type="button" data-close aria-label="Cerrar archivo">×</button>
+    <div class="dialog-layout">
+      <div class="dialog-main">
+        <p class="section-kicker">Archivo / Edición 001</p>
+        <h2 id="pachuca-title">DIAMA PACHUCA</h2>
+        <p class="dialog-copy">La primera edición en Pachuca expandió el sonido de DIAMA: ritmos latinos experimentales, quiebres de drum and bass y la crudeza del techno industrial. Una comunidad unida por el baile y la evolución de la cultura rave en Hidalgo.</p>
+        <div class="dialog-gallery">
+          <img src="Imagenes/Diama Pachuca 001/FOTOP1.jpg" alt="DIAMA Pachuca 001" loading="lazy">
+          <img src="Imagenes/Diama Pachuca 001/FOTOP2.jpg" alt="Público de DIAMA Pachuca 001" loading="lazy">
+          <img src="Imagenes/Diama Pachuca 001/FOTOP4.jpg" alt="Presentación en DIAMA Pachuca 001" loading="lazy">
+          <img src="Imagenes/Diama Pachuca 001/FOTOP8.jpg" alt="Recap de DIAMA Pachuca 001" loading="lazy">
+        </div>
+      </div>
+      <aside class="dialog-side">
+        <p class="section-kicker">Artistas</p>
+        <div class="artist-list">
+          <div class="artist"><strong>Grupo Precario</strong></div>
+          <div class="artist"><strong>Amnoizex × Wvy Loasean</strong></div>
+          <div class="artist"><strong>BreakMadre × Caparroso</strong></div>
+          <div class="artist"><strong>Awexa × Andresestr3s</strong></div>
+          <div class="artist"><strong>Kinychbeat × FireflyLight</strong></div>
+        </div>
+      </aside>
+    </div>
+  </dialog>
 
-        function openOverlay(){
-            overlay.classList.add("active");
-        }
+  <dialog class="dialog" id="cdmx-dialog" aria-labelledby="cdmx-title">
+    <button class="dialog-close" type="button" data-close aria-label="Cerrar transmisión">×</button>
+    <div class="dialog-layout">
+      <div class="dialog-main">
+        <p class="section-kicker">CDMX / Señal activa</p>
+        <h2 id="cdmx-title">DIAMA × CENIZA</h2>
+        <p class="dialog-copy">El próximo pop-up aún no sucede. Fecha, sede y acceso solo se revelan dentro de Diama Dungeon.</p>
+        <div class="secret-panel">
+          <p class="section-kicker">Access protocol</p>
+          <h3>LA INFORMACIÓN ESTÁ DENTRO DEL JUEGO.</h3>
+          <p>Atraviesa el dungeon, encuentra la señal y desbloquea la siguiente edición de DIAMA en CDMX.</p>
+          <a class="button button-primary" href="https://caparroso.github.io/DiamaDungeon/" target="_blank" rel="noopener noreferrer">Jugar Diama Dungeon <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+      <aside class="dialog-side">
+        <p class="section-kicker">Estado</p>
+        <div class="artist"><strong>Evento no realizado</strong></div>
+        <div class="artist"><strong>Revelación en curso</strong></div>
+        <div class="artist"><strong>CDMX</strong></div>
+      </aside>
+    </div>
+  </dialog>
 
-        function closeOverlay(){
-            overlay.classList.remove("active");
-        }
+  <script>
+    const dialogTriggers = document.querySelectorAll("[data-dialog]");
+    const dialogs = document.querySelectorAll("dialog");
 
-        function openPachucaOverlay(){
-            pachucaOverlay.classList.add("active");
-        }
+    function closeDialog(dialog) {
+      dialog.close();
+      document.body.classList.remove("dialog-open");
+    }
 
-        function closePachucaOverlay(){
-            pachucaOverlay.classList.remove("active");
-        }
-    </script>
+    dialogTriggers.forEach((trigger) => {
+      trigger.addEventListener("click", () => {
+        const dialog = document.getElementById(trigger.dataset.dialog);
+        dialog.showModal();
+        document.body.classList.add("dialog-open");
+      });
+    });
+
+    dialogs.forEach((dialog) => {
+      dialog.querySelector("[data-close]").addEventListener("click", () => closeDialog(dialog));
+      dialog.addEventListener("click", (event) => {
+        if (event.target === dialog) closeDialog(dialog);
+      });
+      dialog.addEventListener("close", () => document.body.classList.remove("dialog-open"));
+    });
+  </script>
 </body>
 </html>
