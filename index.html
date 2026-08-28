@@ -151,12 +151,12 @@
     .event-card h3{font-size:1.45rem;line-height:1.12;letter-spacing:-.03em;margin:12px 0}
     .event-card p{font-size:.92rem;color:var(--muted)}
     .event-action{margin-top:24px;font-size:.7rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase}
-    .gallery{display:grid;grid-template-columns:repeat(12,1fr);grid-auto-rows:180px;gap:14px}
-    .gallery figure{overflow:hidden;border-radius:20px;border:1px solid var(--line);background:#111}
-    .gallery figure:nth-child(1),.gallery figure:nth-child(4){grid-column:span 7;grid-row:span 2}
-    .gallery figure:nth-child(2),.gallery figure:nth-child(3){grid-column:span 5}
-    .gallery figure:nth-child(5){grid-column:span 5;grid-row:span 2}
-    .gallery figure:nth-child(6),.gallery figure:nth-child(7){grid-column:span 7}
+    .gallery{display:grid;grid-template-columns:repeat(12,1fr);grid-auto-flow:dense;grid-auto-rows:180px;gap:14px}
+    .gallery figure{grid-column:span 4;overflow:hidden;border-radius:20px;border:1px solid var(--line);background:#111}
+    .gallery figure:nth-child(6n+1){grid-column:span 7;grid-row:span 2}
+    .gallery figure:nth-child(6n+2){grid-column:span 5;grid-row:span 2}
+    .gallery figure:nth-child(6n+3),.gallery figure:nth-child(6n+6){grid-column:span 5}
+    .gallery figure:nth-child(6n+4),.gallery figure:nth-child(6n+5){grid-column:span 7}
     .gallery img{width:100%;height:100%;object-fit:cover;transition:transform .6s}
     .gallery figure:hover img{transform:scale(1.035)}
     .networks{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px}
@@ -224,19 +224,19 @@
       <a href="#ediciones">Ediciones</a>
       <a href="#archivo">Archivo</a>
       <a href="#comunidad">Comunidad</a>
-      <a class="nav-cta" href="https://caparroso.github.io/DiamaDungeon/" target="_blank" rel="noopener noreferrer">Entrar al juego</a>
+      <a class="nav-cta" href="https://caparroso.github.io/DiamaXChaos/#intro" target="_blank" rel="noopener noreferrer">Registro</a>
     </div>
   </nav>
 
   <main id="contenido">
     <header class="hero" id="inicio">
       <div class="hero-inner">
-        <p class="eyebrow">Próxima transmisión</p>
-        <h1>DIAMA<br>× CENIZA</h1>
-        <p class="hero-subtitle">La ciudad se revela jugando</p>
-        <p class="hero-copy">Fecha, sede y acceso permanecen ocultos. Entra a Diama Dungeon y descubre el próximo pop-up de DIAMA antes que nadie.</p>
+        <p class="eyebrow">Próximo evento</p>
+        <h1>DIAMA ×<br>CHAOS SABBATI</h1>
+        <p class="hero-subtitle">5 de febrero</p>
+        <p class="hero-copy">Una nueva edición de DIAMA está por comenzar. Regístrate para recibir el acceso y toda la información del evento.</p>
         <div class="actions">
-          <a class="button button-primary" href="https://caparroso.github.io/DiamaDungeon/" target="_blank" rel="noopener noreferrer">Jugar Diama Dungeon <span aria-hidden="true">↗</span></a>
+          <a class="button button-primary" href="https://caparroso.github.io/DiamaXChaos/#intro" target="_blank" rel="noopener noreferrer">Registro <span aria-hidden="true">↗</span></a>
           <a class="button" href="#games">Explorar DIAMA Games</a>
         </div>
         <a class="scroll-cue" href="#games">Descender ↓</a>
@@ -261,7 +261,7 @@
             <span class="game-number" aria-hidden="true">02</span>
             <p class="game-tag">Event reveal / CDMX</p>
             <h3>DIAMA DUNGEON</h3>
-            <p>Explora el dungeon y encuentra la revelación del próximo pop-up de DIAMA × CENIZA.</p>
+            <p>Explora el dungeon y recorre una de las experiencias interactivas del universo DIAMA.</p>
             <a class="button button-primary" href="https://caparroso.github.io/DiamaDungeon/" target="_blank" rel="noopener noreferrer">Entrar al dungeon <span aria-hidden="true">↗</span></a>
           </article>
         </div>
@@ -298,11 +298,11 @@
             </div>
           </article>
           <article class="city">
-            <div class="city-header"><h3 class="city-name">CDMX</h3><span class="city-count">Señal activa</span></div>
+            <div class="city-header"><h3 class="city-name">CDMX</h3><span class="city-count">1 edición</span></div>
             <div class="events-grid">
-              <button class="event-card featured" type="button" data-dialog="cdmx-dialog">
-                <div><span class="event-label">Pop-up / Revelación interactiva</span><h3>DIAMA × CENIZA</h3><p>La primera señal de DIAMA en CDMX está dentro de Diama Dungeon. El evento todavía no sucede.</p></div>
-                <span class="event-action">Abrir transmisión →</span>
+              <button class="event-card" type="button" data-dialog="cdmx-dialog">
+                <div><span class="event-label">Penthouse / Recap</span><h3>DIAMA PENTHOUSE</h3><p>La primera edición de DIAMA en CDMX. Un pop-up revelado a través de Diama Dungeon.</p></div>
+                <span class="event-action">Ver archivo →</span>
               </button>
             </div>
           </article>
@@ -314,16 +314,35 @@
       <div class="section-inner">
         <div class="section-heading">
           <div><p class="section-kicker">Memory fragments</p><h2>ARCHIVO VISUAL</h2></div>
-          <p class="section-description">Fragmentos de las primeras ediciones de DIAMA en Querétaro y Pachuca.</p>
+          <p class="section-description">Fragmentos entrelazados de DIAMA en Querétaro, Pachuca y CDMX.</p>
         </div>
         <div class="gallery">
           <figure><img src="Imagenes/DiamaQueretaro001/FOTO1.JPG" alt="Público durante DIAMA Querétaro" loading="lazy"></figure>
+          <figure><img src="Imagenes/DiamaPenthouse/DSC07914.jpg" alt="Comunidad de DIAMA Penthouse en CDMX" loading="lazy"></figure>
           <figure><img src="Imagenes/Diama Pachuca 001/FOTOP1.jpg" alt="Escena de DIAMA Pachuca" loading="lazy"></figure>
+          <figure><img src="Imagenes/DiamaPenthouse/DSC07987.jpg" alt="DJ durante DIAMA Penthouse" loading="lazy"></figure>
           <figure><img src="Imagenes/DiamaQueretaro001/FOTO5.jpeg" alt="Presentación en DIAMA Querétaro" loading="lazy"></figure>
+          <figure><img src="Imagenes/DiamaPenthouse/DSC07940.jpg" alt="Set en DIAMA Penthouse" loading="lazy"></figure>
           <figure><img src="Imagenes/Diama Pachuca 001/FOTOP4.jpg" alt="Público de DIAMA Pachuca" loading="lazy"></figure>
+          <figure><img src="Imagenes/DiamaPenthouse/DSC07920.jpg" alt="Retrato de la comunidad en DIAMA Penthouse" loading="lazy"></figure>
           <figure><img src="Imagenes/Diama Pachuca 001/FOTOP6.jpg" alt="Artista durante DIAMA Pachuca" loading="lazy"></figure>
+          <figure><img src="Imagenes/DiamaPenthouse/DSC07892.jpg" alt="DJ y público de DIAMA Penthouse" loading="lazy"></figure>
           <figure><img src="Imagenes/DiamaQueretaro001/FOTO7.jpeg" alt="Luces de DIAMA Querétaro" loading="lazy"></figure>
+          <figure><img src="Imagenes/DiamaPenthouse/DSC07893.jpg" alt="Pista de DIAMA Penthouse" loading="lazy"></figure>
           <figure><img src="Imagenes/Diama Pachuca 001/FOTOP8.jpg" alt="Recapitulación de DIAMA Pachuca" loading="lazy"></figure>
+          <figure><img src="Imagenes/DiamaPenthouse/DSC07806.jpg" alt="Instalación de DIAMA Penthouse" loading="lazy"></figure>
+          <figure><img src="Imagenes/DiamaPenthouse/DSC07791.jpg" alt="Penthouse y vista de CDMX" loading="lazy"></figure>
+          <figure><img src="Imagenes/DiamaPenthouse/DSC07960-2.jpg" alt="Performance en DIAMA Penthouse" loading="lazy"></figure>
+          <figure><img src="Imagenes/DiamaPenthouse/DSC07955.jpg" alt="Performance y público en DIAMA Penthouse" loading="lazy"></figure>
+          <figure><img src="Imagenes/DiamaPenthouse/DSC07949-2.jpg" alt="Artistas durante DIAMA Penthouse" loading="lazy"></figure>
+          <figure><img src="Imagenes/DiamaPenthouse/DSC07928.jpg" alt="DJ frente al público de DIAMA Penthouse" loading="lazy"></figure>
+          <figure><img src="Imagenes/DiamaPenthouse/DSC07901.jpg" alt="DJ set de DIAMA Penthouse" loading="lazy"></figure>
+          <figure><img src="Imagenes/DiamaPenthouse/DSC07894.jpg" alt="Noche de DIAMA Penthouse" loading="lazy"></figure>
+          <figure><img src="Imagenes/DiamaPenthouse/DSC07958.jpg" alt="Performance central de DIAMA Penthouse" loading="lazy"></figure>
+          <figure><img src="Imagenes/DiamaPenthouse/DSC07945.jpg" alt="Baile durante DIAMA Penthouse" loading="lazy"></figure>
+          <figure><img src="Imagenes/DiamaPenthouse/DSC07823.jpg" alt="Artistas de DIAMA Penthouse" loading="lazy"></figure>
+          <figure><img src="Imagenes/DiamaPenthouse/DSC07799.jpg" alt="Retrato de DJ en DIAMA Penthouse" loading="lazy"></figure>
+          <figure><img src="Imagenes/DiamaPenthouse/DSC08009.jpg" alt="Presentación vocal en DIAMA Penthouse" loading="lazy"></figure>
         </div>
       </div>
     </section>
@@ -434,23 +453,44 @@
   </dialog>
 
   <dialog class="dialog" id="cdmx-dialog" aria-labelledby="cdmx-title">
-    <button class="dialog-close" type="button" data-close aria-label="Cerrar transmisión">×</button>
+    <button class="dialog-close" type="button" data-close aria-label="Cerrar archivo">×</button>
     <div class="dialog-layout">
       <div class="dialog-main">
-        <p class="section-kicker">CDMX / Señal activa</p>
-        <h2 id="cdmx-title">DIAMA × CENIZA</h2>
-        <p class="dialog-copy">El próximo pop-up aún no sucede. Fecha, sede y acceso solo se revelan dentro de Diama Dungeon.</p>
+        <p class="section-kicker">CDMX / Archivo</p>
+        <h2 id="cdmx-title">DIAMA PENTHOUSE</h2>
+        <p class="dialog-copy">La primera edición de DIAMA en CDMX comenzó como una señal oculta dentro de Diama Dungeon y terminó convirtiéndose en un pop-up sobre la ciudad.</p>
+        <div class="dialog-gallery">
+          <img src="Imagenes/DiamaPenthouse/DSC07914.jpg" alt="Comunidad de DIAMA Penthouse" loading="lazy">
+          <img src="Imagenes/DiamaPenthouse/DSC07987.jpg" alt="DJ durante DIAMA Penthouse" loading="lazy">
+          <img src="Imagenes/DiamaPenthouse/DSC07940.jpg" alt="Set en DIAMA Penthouse" loading="lazy">
+          <img src="Imagenes/DiamaPenthouse/DSC07920.jpg" alt="Retrato de la comunidad en DIAMA Penthouse" loading="lazy">
+          <img src="Imagenes/DiamaPenthouse/DSC07892.jpg" alt="DJ y público en DIAMA Penthouse" loading="lazy">
+          <img src="Imagenes/DiamaPenthouse/DSC07893.jpg" alt="Pista de DIAMA Penthouse" loading="lazy">
+          <img src="Imagenes/DiamaPenthouse/DSC07806.jpg" alt="Instalación de DIAMA Penthouse" loading="lazy">
+          <img src="Imagenes/DiamaPenthouse/DSC07791.jpg" alt="Vista del penthouse en CDMX" loading="lazy">
+          <img src="Imagenes/DiamaPenthouse/DSC07960-2.jpg" alt="Performance en DIAMA Penthouse" loading="lazy">
+          <img src="Imagenes/DiamaPenthouse/DSC07955.jpg" alt="Performance frente al público" loading="lazy">
+          <img src="Imagenes/DiamaPenthouse/DSC07949-2.jpg" alt="Artistas durante DIAMA Penthouse" loading="lazy">
+          <img src="Imagenes/DiamaPenthouse/DSC07928.jpg" alt="DJ frente al público" loading="lazy">
+          <img src="Imagenes/DiamaPenthouse/DSC07901.jpg" alt="DJ set de DIAMA Penthouse" loading="lazy">
+          <img src="Imagenes/DiamaPenthouse/DSC07894.jpg" alt="Noche de DIAMA Penthouse" loading="lazy">
+          <img src="Imagenes/DiamaPenthouse/DSC07958.jpg" alt="Performance central de DIAMA Penthouse" loading="lazy">
+          <img src="Imagenes/DiamaPenthouse/DSC07945.jpg" alt="Baile durante DIAMA Penthouse" loading="lazy">
+          <img src="Imagenes/DiamaPenthouse/DSC07823.jpg" alt="Artistas de DIAMA Penthouse" loading="lazy">
+          <img src="Imagenes/DiamaPenthouse/DSC07799.jpg" alt="Retrato de DJ en DIAMA Penthouse" loading="lazy">
+          <img src="Imagenes/DiamaPenthouse/DSC08009.jpg" alt="Presentación vocal en DIAMA Penthouse" loading="lazy">
+        </div>
         <div class="secret-panel">
-          <p class="section-kicker">Access protocol</p>
-          <h3>LA INFORMACIÓN ESTÁ DENTRO DEL JUEGO.</h3>
-          <p>Atraviesa el dungeon, encuentra la señal y desbloquea la siguiente edición de DIAMA en CDMX.</p>
+          <p class="section-kicker">Interactive archive</p>
+          <h3>LA SEÑAL COMENZÓ EN DIAMA DUNGEON.</h3>
+          <p>Vuelve a entrar al juego que reveló la primera edición de DIAMA en CDMX.</p>
           <a class="button button-primary" href="https://caparroso.github.io/DiamaDungeon/" target="_blank" rel="noopener noreferrer">Jugar Diama Dungeon <span aria-hidden="true">↗</span></a>
         </div>
       </div>
       <aside class="dialog-side">
         <p class="section-kicker">Estado</p>
-        <div class="artist"><strong>Evento no realizado</strong></div>
-        <div class="artist"><strong>Revelación en curso</strong></div>
+        <div class="artist"><strong>Evento realizado</strong></div>
+        <div class="artist"><strong>Penthouse pop-up</strong></div>
         <div class="artist"><strong>CDMX</strong></div>
       </aside>
     </div>
