@@ -151,14 +151,18 @@
     .event-card h3{font-size:1.45rem;line-height:1.12;letter-spacing:-.03em;margin:12px 0}
     .event-card p{font-size:.92rem;color:var(--muted)}
     .event-action{margin-top:24px;font-size:.7rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase}
-    .gallery{display:grid;grid-template-columns:repeat(12,1fr);grid-auto-flow:dense;grid-auto-rows:180px;gap:14px}
-    .gallery figure{grid-column:span 4;overflow:hidden;border-radius:20px;border:1px solid var(--line);background:#111}
-    .gallery figure:nth-child(6n+1){grid-column:span 7;grid-row:span 2}
-    .gallery figure:nth-child(6n+2){grid-column:span 5;grid-row:span 2}
-    .gallery figure:nth-child(6n+3),.gallery figure:nth-child(6n+6){grid-column:span 5}
-    .gallery figure:nth-child(6n+4),.gallery figure:nth-child(6n+5){grid-column:span 7}
-    .gallery img{width:100%;height:100%;object-fit:cover;transition:transform .6s}
-    .gallery figure:hover img{transform:scale(1.035)}
+    .gallery-window{width:100%;overflow:hidden;padding:10px 0;mask-image:linear-gradient(to right,transparent,#000 5%,#000 95%,transparent)}
+    .gallery-track{display:flex;width:max-content;gap:18px;animation:gallery-scroll 110s linear infinite;will-change:transform}
+    .gallery-track:hover{animation-play-state:paused}
+    .gallery-track figure{width:min(440px,78vw);height:290px;flex:0 0 auto;overflow:hidden;border-radius:20px;border:1px solid var(--line);background:#111}
+    .gallery-track figure:nth-child(3n){width:min(330px,70vw)}
+    .gallery-track img{width:100%;height:100%;object-fit:cover;transition:transform .6s}
+    .gallery-track figure:hover img{transform:scale(1.035)}
+    @keyframes gallery-scroll{to{transform:translateX(calc(-50% - 9px))}}
+    .selection-card{display:grid;grid-template-columns:minmax(0,1.2fr) auto;align-items:end;gap:28px;padding:42px;border:1px solid var(--line);border-radius:var(--radius);background:radial-gradient(circle at 80% 20%,rgba(196,167,255,.22),transparent 35%),rgba(5,5,5,.72)}
+    .selection-card p{max-width:680px;margin-top:16px;color:var(--muted)}
+    .event-card.pending{cursor:default;background:rgba(255,255,255,.025)}
+    .event-card.pending:hover{transform:none;border-color:rgba(255,255,255,.09)}
     .networks{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px}
     .network-group{padding:26px;border:1px solid var(--line);border-radius:var(--radius);background:rgba(5,5,5,.65)}
     .network-group h3{font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:16px}
@@ -200,8 +204,9 @@
       .games-grid,.events-grid,.networks{grid-template-columns:1fr}
       .game-card{min-height:390px;padding:28px}
       .city{padding:18px}
-      .gallery{grid-template-columns:1fr;grid-auto-rows:260px}
-      .gallery figure:nth-child(n){grid-column:auto;grid-row:auto}
+      .gallery-track{gap:12px;animation-duration:85s}
+      .gallery-track figure,.gallery-track figure:nth-child(3n){width:82vw;height:250px}
+      .selection-card{grid-template-columns:1fr;padding:28px}
       .dialog-layout{grid-template-columns:1fr}
       .dialog-main{padding:90px 20px 45px}
       .dialog-side{padding:38px 20px 70px;border-left:0;border-top:1px solid var(--line)}
@@ -224,20 +229,20 @@
       <a href="#ediciones">Ediciones</a>
       <a href="#archivo">Archivo</a>
       <a href="#comunidad">Comunidad</a>
-      <a class="nav-cta" href="https://caparroso.github.io/DiamaXChaos/#intro" target="_blank" rel="noopener noreferrer">Registro</a>
+      <a class="nav-cta" href="https://caparroso.github.io/DIAMA-Dj-Selections/" target="_blank" rel="noopener noreferrer">DJ Selections</a>
     </div>
   </nav>
 
   <main id="contenido">
     <header class="hero" id="inicio">
       <div class="hero-inner">
-        <p class="eyebrow">Próximo evento</p>
-        <h1>DIAMA ×<br>CHAOS SABBATI</h1>
-        <p class="hero-subtitle">5 de Septiembre 2026</p>
-        <p class="hero-copy">Una nueva edición de DIAMA está por comenzar. Regístrate para recibir el acceso y toda la información del evento.</p>
+        <p class="eyebrow">Próxima señal</p>
+        <h1>DIAMA ×<br>?????</h1>
+        <p class="hero-subtitle">30 de octubre · Querétaro &amp; CDMX</p>
+        <p class="hero-copy">Dos ciudades. Una nueva transmisión. La siguiente edición de DIAMA permanece oculta.</p>
         <div class="actions">
-          <a class="button button-primary" href="https://caparroso.github.io/DiamaXChaos/#intro" target="_blank" rel="noopener noreferrer">Registro <span aria-hidden="true">↗</span></a>
-          <a class="button" href="#games">Explorar DIAMA Games</a>
+          <a class="button button-primary" href="#ediciones">Explorar el archivo</a>
+          <a class="button" href="https://caparroso.github.io/DIAMA-Dj-Selections/" target="_blank" rel="noopener noreferrer">DJ Selections <span aria-hidden="true">↗</span></a>
         </div>
         <a class="scroll-cue" href="#games">Descender ↓</a>
       </div>
@@ -276,8 +281,12 @@
         </div>
         <div class="city-list">
           <article class="city">
-            <div class="city-header"><h3 class="city-name">Querétaro</h3><span class="city-count">2 ediciones</span></div>
+            <div class="city-header"><h3 class="city-name">Querétaro</h3><span class="city-count">3 ediciones</span></div>
             <div class="events-grid">
+              <button class="event-card featured" type="button" data-dialog="chaos-dialog">
+                <div><span class="event-label">05.09.2026 / Recap</span><h3>DIAMA × CHAOS SABBATI</h3><p>Arte, performance, DJs y comunidad en una edición de alta energía en Querétaro.</p></div>
+                <span class="event-action">Ver recapitulación →</span>
+              </button>
               <button class="event-card featured" type="button" data-dialog="prrts-dialog">
                 <div><span class="event-label">17.07.2026 / Recap</span><h3>DIAMA × PRRTS</h3><p>Seis artistas, una comunidad y el set de CAPARROSO como registro audiovisual de la noche.</p></div>
                 <span class="event-action">Ver recapitulación →</span>
@@ -289,8 +298,12 @@
             </div>
           </article>
           <article class="city">
-            <div class="city-header"><h3 class="city-name">Pachuca</h3><span class="city-count">1 edición</span></div>
+            <div class="city-header"><h3 class="city-name">Pachuca</h3><span class="city-count">2 ediciones</span></div>
             <div class="events-grid">
+              <button class="event-card featured" type="button" data-dialog="pachuca002-dialog">
+                <div><span class="event-label">25.09.2026 / Edición 002</span><h3>DIAMA PACHUCA 002</h3><p>La segunda edición de DIAMA en Pachuca. El archivo fotográfico estará disponible próximamente.</p></div>
+                <span class="event-action">Ver registro →</span>
+              </button>
               <button class="event-card" type="button" data-dialog="pachuca-dialog">
                 <div><span class="event-label">Edición 001 / Recap</span><h3>DIAMA PACHUCA 001</h3><p>Ritmos latinos experimentales, drum and bass y techno industrial en Hidalgo.</p></div>
                 <span class="event-action">Ver archivo →</span>
@@ -314,35 +327,33 @@
       <div class="section-inner">
         <div class="section-heading">
           <div><p class="section-kicker">Memory fragments</p><h2>ARCHIVO VISUAL</h2></div>
-          <p class="section-description">Fragmentos entrelazados de DIAMA en Querétaro, Pachuca y CDMX.</p>
+          <p class="section-description">Un carrete vivo que mezcla fragmentos de todas las ediciones con archivo visual disponible.</p>
         </div>
-        <div class="gallery">
-          <figure><img src="Imagenes/DiamaQueretaro001/FOTO1.JPG" alt="Público durante DIAMA Querétaro" loading="lazy"></figure>
-          <figure><img src="Imagenes/DiamaPenthouse/DSC07914.jpg" alt="Comunidad de DIAMA Penthouse en CDMX" loading="lazy"></figure>
-          <figure><img src="Imagenes/Diama Pachuca 001/FOTOP1.jpg" alt="Escena de DIAMA Pachuca" loading="lazy"></figure>
-          <figure><img src="Imagenes/DiamaPenthouse/DSC07987.jpg" alt="DJ durante DIAMA Penthouse" loading="lazy"></figure>
-          <figure><img src="Imagenes/DiamaQueretaro001/FOTO5.jpeg" alt="Presentación en DIAMA Querétaro" loading="lazy"></figure>
-          <figure><img src="Imagenes/DiamaPenthouse/DSC07940.jpg" alt="Set en DIAMA Penthouse" loading="lazy"></figure>
-          <figure><img src="Imagenes/Diama Pachuca 001/FOTOP4.jpg" alt="Público de DIAMA Pachuca" loading="lazy"></figure>
-          <figure><img src="Imagenes/DiamaPenthouse/DSC07920.jpg" alt="Retrato de la comunidad en DIAMA Penthouse" loading="lazy"></figure>
-          <figure><img src="Imagenes/Diama Pachuca 001/FOTOP6.jpg" alt="Artista durante DIAMA Pachuca" loading="lazy"></figure>
-          <figure><img src="Imagenes/DiamaPenthouse/DSC07892.jpg" alt="DJ y público de DIAMA Penthouse" loading="lazy"></figure>
-          <figure><img src="Imagenes/DiamaQueretaro001/FOTO7.jpeg" alt="Luces de DIAMA Querétaro" loading="lazy"></figure>
-          <figure><img src="Imagenes/DiamaPenthouse/DSC07893.jpg" alt="Pista de DIAMA Penthouse" loading="lazy"></figure>
-          <figure><img src="Imagenes/Diama Pachuca 001/FOTOP8.jpg" alt="Recapitulación de DIAMA Pachuca" loading="lazy"></figure>
-          <figure><img src="Imagenes/DiamaPenthouse/DSC07806.jpg" alt="Instalación de DIAMA Penthouse" loading="lazy"></figure>
-          <figure><img src="Imagenes/DiamaPenthouse/DSC07791.jpg" alt="Penthouse y vista de CDMX" loading="lazy"></figure>
-          <figure><img src="Imagenes/DiamaPenthouse/DSC07960-2.jpg" alt="Performance en DIAMA Penthouse" loading="lazy"></figure>
-          <figure><img src="Imagenes/DiamaPenthouse/DSC07955.jpg" alt="Performance y público en DIAMA Penthouse" loading="lazy"></figure>
-          <figure><img src="Imagenes/DiamaPenthouse/DSC07949-2.jpg" alt="Artistas durante DIAMA Penthouse" loading="lazy"></figure>
-          <figure><img src="Imagenes/DiamaPenthouse/DSC07928.jpg" alt="DJ frente al público de DIAMA Penthouse" loading="lazy"></figure>
-          <figure><img src="Imagenes/DiamaPenthouse/DSC07901.jpg" alt="DJ set de DIAMA Penthouse" loading="lazy"></figure>
-          <figure><img src="Imagenes/DiamaPenthouse/DSC07894.jpg" alt="Noche de DIAMA Penthouse" loading="lazy"></figure>
-          <figure><img src="Imagenes/DiamaPenthouse/DSC07958.jpg" alt="Performance central de DIAMA Penthouse" loading="lazy"></figure>
-          <figure><img src="Imagenes/DiamaPenthouse/DSC07945.jpg" alt="Baile durante DIAMA Penthouse" loading="lazy"></figure>
-          <figure><img src="Imagenes/DiamaPenthouse/DSC07823.jpg" alt="Artistas de DIAMA Penthouse" loading="lazy"></figure>
-          <figure><img src="Imagenes/DiamaPenthouse/DSC07799.jpg" alt="Retrato de DJ en DIAMA Penthouse" loading="lazy"></figure>
-          <figure><img src="Imagenes/DiamaPenthouse/DSC08009.jpg" alt="Presentación vocal en DIAMA Penthouse" loading="lazy"></figure>
+        <div class="gallery-window" aria-label="Galería en movimiento de las ediciones DIAMA">
+          <div class="gallery-track" id="main-gallery">
+            <figure><img src="Imagenes/DiamaQueretaro001/FOTO1.JPG" alt="Público durante DIAMA Querétaro 001" loading="lazy"></figure>
+            <figure><img src="Imagenes/Diama Pachuca 001/FOTOP1.jpg" alt="Escena de DIAMA Pachuca 001" loading="lazy"></figure>
+            <figure><img src="Imagenes/DiamaPenthouse/DSC07914.jpg" alt="Comunidad de DIAMA Penthouse en CDMX" loading="lazy"></figure>
+            <figure><img src="Imagenes/DiamaChaosSabbati/CHAOS-01.jpg" alt="Pista de DIAMA × Chaos Sabbati" loading="lazy"></figure>
+            <figure><img src="Imagenes/DiamaQueretaro001/FOTO5.jpeg" alt="Presentación en DIAMA Querétaro 001" loading="lazy"></figure>
+            <figure><img src="Imagenes/Diama Pachuca 001/FOTOP4.jpg" alt="Público de DIAMA Pachuca 001" loading="lazy"></figure>
+            <figure><img src="Imagenes/DiamaPenthouse/DSC07987.jpg" alt="DJ durante DIAMA Penthouse" loading="lazy"></figure>
+            <figure><img src="Imagenes/DiamaChaosSabbati/CHAOS-02.jpg" alt="Comunidad durante DIAMA × Chaos Sabbati" loading="lazy"></figure>
+            <figure><img src="Imagenes/DiamaQueretaro001/FOTO7.jpeg" alt="Luces de DIAMA Querétaro 001" loading="lazy"></figure>
+            <figure><img src="Imagenes/Diama Pachuca 001/FOTOP6.jpg" alt="Artista durante DIAMA Pachuca 001" loading="lazy"></figure>
+            <figure><img src="Imagenes/DiamaPenthouse/DSC07960-2.jpg" alt="Performance de DIAMA Penthouse" loading="lazy"></figure>
+            <figure><img src="Imagenes/DiamaChaosSabbati/CHAOS-03.jpg" alt="Exhibición de arte en DIAMA × Chaos Sabbati" loading="lazy"></figure>
+            <figure><img src="Imagenes/DiamaPenthouse/DSC07928.jpg" alt="DJ frente al público de DIAMA Penthouse" loading="lazy"></figure>
+            <figure><img src="Imagenes/DiamaChaosSabbati/CHAOS-04.jpg" alt="Retrato de la comunidad en DIAMA × Chaos Sabbati" loading="lazy"></figure>
+            <figure><img src="Imagenes/Diama Pachuca 001/FOTOP8.jpg" alt="Recapitulación de DIAMA Pachuca 001" loading="lazy"></figure>
+            <figure><img src="Imagenes/DiamaChaosSabbati/CHAOS-05.jpg" alt="Baile en DIAMA × Chaos Sabbati" loading="lazy"></figure>
+            <figure><img src="Imagenes/DiamaPenthouse/DSC08009.jpg" alt="Presentación vocal en DIAMA Penthouse" loading="lazy"></figure>
+            <figure><img src="Imagenes/DiamaChaosSabbati/CHAOS-06.jpg" alt="Retrato en DIAMA × Chaos Sabbati" loading="lazy"></figure>
+            <figure><img src="Imagenes/DiamaChaosSabbati/CHAOS-07.jpg" alt="Público de DIAMA × Chaos Sabbati" loading="lazy"></figure>
+            <figure><img src="Imagenes/DiamaChaosSabbati/CHAOS-08.jpg" alt="Retrato durante DIAMA × Chaos Sabbati" loading="lazy"></figure>
+            <figure><img src="Imagenes/DiamaChaosSabbati/CHAOS-09.jpg" alt="DJ set de DIAMA × Chaos Sabbati" loading="lazy"></figure>
+            <figure><img src="Imagenes/DiamaChaosSabbati/CHAOS-10.jpg" alt="Performance de DIAMA × Chaos Sabbati" loading="lazy"></figure>
+          </div>
         </div>
       </div>
     </section>
@@ -369,9 +380,79 @@
         </div>
       </div>
     </section>
+
+    <section class="section" id="dj-selections">
+      <div class="section-inner">
+        <article class="selection-card">
+          <div>
+            <p class="section-kicker">Listen deeper</p>
+            <h2>DJ SELECTIONS</h2>
+            <p>Selecciones conectadas con el sonido de DIAMA. Entra al archivo y descubre la música detrás de la comunidad.</p>
+          </div>
+          <a class="button button-primary" href="https://caparroso.github.io/DIAMA-Dj-Selections/" target="_blank" rel="noopener noreferrer">Abrir DJ Selections <span aria-hidden="true">↗</span></a>
+        </article>
+      </div>
+    </section>
   </main>
 
   <footer>DIAMA — Internet culture / Rave / Community · Contacto 712 264 4470</footer>
+
+  <dialog class="dialog" id="chaos-dialog" aria-labelledby="chaos-title">
+    <button class="dialog-close" type="button" data-close aria-label="Cerrar recapitulación">×</button>
+    <div class="dialog-layout">
+      <div class="dialog-main">
+        <p class="section-kicker">Querétaro / 05.09.2026</p>
+        <h2 id="chaos-title">DIAMA × CHAOS SABBATI</h2>
+        <p class="dialog-copy">Una edición atravesada por arte, performance, sonido y comunidad. Diez fragmentos seleccionados para conservar la energía de la noche.</p>
+        <div class="dialog-gallery">
+          <img src="Imagenes/DiamaChaosSabbati/CHAOS-01.jpg" alt="Pista de DIAMA × Chaos Sabbati" loading="lazy">
+          <img src="Imagenes/DiamaChaosSabbati/CHAOS-02.jpg" alt="Comunidad durante DIAMA × Chaos Sabbati" loading="lazy">
+          <img src="Imagenes/DiamaChaosSabbati/CHAOS-03.jpg" alt="Exhibición de arte en DIAMA × Chaos Sabbati" loading="lazy">
+          <img src="Imagenes/DiamaChaosSabbati/CHAOS-04.jpg" alt="Retrato de la comunidad en DIAMA × Chaos Sabbati" loading="lazy">
+          <img src="Imagenes/DiamaChaosSabbati/CHAOS-05.jpg" alt="Baile en DIAMA × Chaos Sabbati" loading="lazy">
+          <img src="Imagenes/DiamaChaosSabbati/CHAOS-06.jpg" alt="Retrato en DIAMA × Chaos Sabbati" loading="lazy">
+          <img src="Imagenes/DiamaChaosSabbati/CHAOS-07.jpg" alt="Público de DIAMA × Chaos Sabbati" loading="lazy">
+          <img src="Imagenes/DiamaChaosSabbati/CHAOS-08.jpg" alt="Retrato durante DIAMA × Chaos Sabbati" loading="lazy">
+          <img src="Imagenes/DiamaChaosSabbati/CHAOS-09.jpg" alt="DJ set de DIAMA × Chaos Sabbati" loading="lazy">
+          <img src="Imagenes/DiamaChaosSabbati/CHAOS-10.jpg" alt="Performance de DIAMA × Chaos Sabbati" loading="lazy">
+        </div>
+      </div>
+      <aside class="dialog-side">
+        <p class="section-kicker">Registro</p>
+        <div class="artist-list">
+          <div class="artist"><strong>Evento realizado</strong></div>
+          <div class="artist"><strong>5 de septiembre de 2026</strong></div>
+          <div class="artist"><strong>Querétaro</strong></div>
+          <div class="artist"><strong>10 fotos seleccionadas</strong></div>
+        </div>
+      </aside>
+    </div>
+  </dialog>
+
+  <dialog class="dialog" id="pachuca002-dialog" aria-labelledby="pachuca002-title">
+    <button class="dialog-close" type="button" data-close aria-label="Cerrar registro">×</button>
+    <div class="dialog-layout">
+      <div class="dialog-main">
+        <p class="section-kicker">Pachuca / 25.09.2026</p>
+        <h2 id="pachuca002-title">DIAMA PACHUCA 002</h2>
+        <p class="dialog-copy">La segunda edición de DIAMA en Pachuca continuó expandiendo la comunidad y el sonido del proyecto en Hidalgo.</p>
+        <div class="secret-panel">
+          <p class="section-kicker">Archivo en construcción</p>
+          <h3>LAS FOTOS LLEGARÁN PRÓXIMAMENTE.</h3>
+          <p>La edición ya forma parte del archivo DIAMA. Su recap visual se integrará cuando esté disponible.</p>
+        </div>
+      </div>
+      <aside class="dialog-side">
+        <p class="section-kicker">Registro</p>
+        <div class="artist-list">
+          <div class="artist"><strong>Evento realizado</strong></div>
+          <div class="artist"><strong>25 de septiembre de 2026</strong></div>
+          <div class="artist"><strong>Pachuca</strong></div>
+          <div class="artist"><strong>Fotos pendientes</strong></div>
+        </div>
+      </aside>
+    </div>
+  </dialog>
 
   <dialog class="dialog" id="prrts-dialog" aria-labelledby="prrts-title">
     <button class="dialog-close" type="button" data-close aria-label="Cerrar recapitulación">×</button>
@@ -520,6 +601,22 @@
       });
       dialog.addEventListener("close", () => document.body.classList.remove("dialog-open"));
     });
+
+    const mainGallery = document.getElementById("main-gallery");
+    const galleryItems = Array.from(mainGallery.children);
+
+    for (let index = galleryItems.length - 1; index > 0; index -= 1) {
+      const randomIndex = Math.floor(Math.random() * (index + 1));
+      [galleryItems[index], galleryItems[randomIndex]] = [galleryItems[randomIndex], galleryItems[index]];
+    }
+
+    const galleryClones = galleryItems.map((item) => {
+      const clone = item.cloneNode(true);
+      clone.setAttribute("aria-hidden", "true");
+      return clone;
+    });
+
+    mainGallery.replaceChildren(...galleryItems, ...galleryClones);
   </script>
 </body>
 </html>
